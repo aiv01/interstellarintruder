@@ -8,14 +8,14 @@ namespace PowerUp
         [Range(.1f, 10.0f)]
         private float amountSpeedMovement = .5f;
 
-        protected static event StatsChange SpeedMovementStatUp;
+        protected event StatsChange SpeedMovementStatUp;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
                 SpeedMovementStatUp?.Invoke(amountSpeedMovement);
-                gameObject.SetActive(false);
+                Despawn();
             }
         }
 

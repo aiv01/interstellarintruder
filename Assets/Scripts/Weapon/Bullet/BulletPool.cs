@@ -6,9 +6,15 @@ namespace Weapom.Projectile
 {
     public class BulletPool : MonoBehaviour
     {
-        public Bullet bulletPrefab = null;
+        #region SerializeField
+        [SerializeField]
+        private Bullet bulletPrefab = null;
+        #endregion
+
+        #region Private Variable
         private int poolSize = 7;
         private List<Bullet> pool = new List<Bullet>();
+        #endregion
 
         void Awake()
         {
@@ -40,13 +46,10 @@ namespace Weapom.Projectile
         private Bullet CreateInstance()
         {
             Bullet instance = Instantiate<Bullet>(bulletPrefab);
-
             instance.gameObject.SetActive(false);
             instance.transform.SetParent(transform);
             instance.OnDeath += HandleBulletDeath;
-
             pool.Add(instance);
-
             return instance;
         }
 

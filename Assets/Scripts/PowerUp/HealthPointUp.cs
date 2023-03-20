@@ -8,14 +8,14 @@ namespace PowerUp
         [Range(1.0f, 10.0f)]
         private float amountHP = 10.0f;
 
-        protected static event StatsChange HPStatUp;
+        protected event StatsChange HPStatUp;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
                 HPStatUp?.Invoke(amountHP);
-                gameObject.SetActive(false);
+                Despawn();
             }
         }
 

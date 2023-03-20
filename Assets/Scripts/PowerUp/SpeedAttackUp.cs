@@ -7,15 +7,15 @@ namespace PowerUp
         [SerializeField]
         [Range(.1f, 10.0f)]
         private float amountAttackSpeed = .5f;
-        
-        protected static event StatsChange SpeedAttackStatUp;
+
+        protected event StatsChange SpeedAttackStatUp;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
                 SpeedAttackStatUp?.Invoke(amountAttackSpeed);
-                gameObject.SetActive(false);
+                Despawn();
             }
         }
 

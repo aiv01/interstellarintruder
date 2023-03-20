@@ -8,14 +8,14 @@ namespace PowerUp
         [Range(1.0f, 10.0f)]
         private float amountAttackDamage = 2.0f;
 
-        protected static event StatsChange AttackStatUp;
+        protected event StatsChange AttackStatUp;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Player")
             {
                 AttackStatUp?.Invoke(amountAttackDamage);
-                gameObject.SetActive(false);
+                Despawn();
             }
         }
 
