@@ -2,16 +2,26 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MapTools {
+
     
     public class IsaacGeneratorSO : MonoBehaviour{
         public string folderPath = "";
+        public Transform tr;
+        public Vector2 offset;
+        private IsaacTileInfo[,] tileInfo;
+        public IsaacTileInfo[,] TileInfo
+    {
+        get { return tileInfo; }
+    }
         IsaacTile[,] tiles;
         Queue<Vector2Int> tilesQueue;
         int CellNum = 0;
-        int level = 5;
-
-        public void Generate(Transform container, int width, int height)
+        public int level = 1;
+    private void Start()
+    {
+        Generate(tr, 10, 10);
+    }
+    public void Generate(Transform container, int width, int height)
         {
             
             tiles = new IsaacTile[width, height];
@@ -57,7 +67,7 @@ namespace MapTools {
                 }
                 tilesQueue.Enqueue(tilePosition);
             }
-            string debug = "";
+        
             for(int y = 0; y < width; y++)
             {
                 for(int x = 0; x < height; x++)
@@ -65,30 +75,35 @@ namespace MapTools {
                     
                     if (tiles[y, x] != null)
                     {
-                        debug += "x";
-                        var path = folderPath + " " + tiles[y, x].doors;
+
+                    //var path = folderPath + " " + tiles[y, x].doors;
+                    var path = folderPath;
                         var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
                         var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
                         tiles[y, x].info = tilePrefab;
                     }
-                    else debug += "-";
+                    
                     
                 }
-                debug += "\n";
+                
             }
-            Debug.Log(debug);
+            
             DrawMap(container, width, height);
         }
         private void DrawMap(Transform container, int width, int height)
         {
-            for (var row = 0; row < height; row++)
+        tileInfo = new IsaacTileInfo[width, height];
+        for (var row = 0; row < height; row++)
             {
                 for (var col = 0; col < width; col++)
                 {
                     if (tiles[col, row] != null)
                     {
                         var go = Instantiate(tiles[col, row].info, container);
-                        go.transform.localPosition = new Vector3(col * 2, 0, row * 2);
+                        go.gameObject.SetActive(false);
+                        go.name = "Tile " + col + ", " + row;
+                        go.transform.localPosition = new Vector3(col * offset.x, 0, row * offset.y);
+                        tileInfo[col,row] = go;
                     }
                 }
             }
@@ -185,4 +200,3 @@ namespace MapTools {
 
         }
     
-    }

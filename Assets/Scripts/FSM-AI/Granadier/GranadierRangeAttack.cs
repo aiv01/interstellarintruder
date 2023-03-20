@@ -20,6 +20,7 @@ public class GranadierRangeAttack : State
 
     public override void Update()
     {
+        Debug.Log("Range");
         Vector3 direction = player.position - entity.transform.position;
         float angle = Vector3.Angle(direction, entity.transform.forward);
         direction.y = 0.0f;
@@ -36,7 +37,7 @@ public class GranadierRangeAttack : State
         {
             nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats);
             stage = EVENT.Exit;
-        } else if (CanShootPlayer())
+        } else if (!CanShootPlayer())
         {
             nextState = new GranadierIdle(entity, agent, anim, player, stats);
             stage = EVENT.Exit;

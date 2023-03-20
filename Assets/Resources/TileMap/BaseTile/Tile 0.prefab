@@ -87,6 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2083248626912536873}
+  - component: {fileID: 3950569459843513024}
   m_Layer: 0
   m_Name: Tile 0
   m_TagString: Untagged
@@ -111,6 +112,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3950569459843513024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387386066184135421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652d1b1e2d5c01b4bb3027f730be522f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawns: []
+  powerUpsSpawns: []
+  Doors: []
 --- !u!1001 &105170571043182841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +341,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 5e87a33ab14e3ae4489335b36e345d4a, type: 3}
   m_PrefabInstance: {fileID: 1613009152436221114}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &7008157558786291953
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613009152436318746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.5, z: 4.0046396}
+  m_Center: {x: 0, y: 0, z: -0.00004696846}
 --- !u!114 &3263792856882742515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,19 +384,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: f32b7e93e3a46534fa8b217e1c9f8aa6, type: 2}
   m_BuildHeightMesh: 0
---- !u!65 &7008157558786291953
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613009152436318746}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 0.5, z: 4.0046396}
-  m_Center: {x: 0, y: 0, z: -0.00004696846}
 --- !u!4 &1613009152436350522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5e87a33ab14e3ae4489335b36e345d4a, type: 3}

@@ -18,6 +18,7 @@ public class GranadierMeleeAttack : State
 
     public override void Update()
     {
+        Debug.Log("Melee");
         //Melee attack logic
         if (CanShootPlayer())
         {
@@ -29,7 +30,7 @@ public class GranadierMeleeAttack : State
             nextState = new GranadierIdle(entity, agent, anim, player, stats);
             stage = EVENT.Exit;
         }
-        base.Update();
+        
     }
 
     public override void Exit()

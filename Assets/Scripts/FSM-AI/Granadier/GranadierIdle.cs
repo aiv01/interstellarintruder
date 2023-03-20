@@ -17,7 +17,8 @@ public class GranadierIdle : State
 
     public override void Update()
     {
-        if(CanSeePlayer())
+        Debug.Log("Idle");
+        if (CanSeePlayer())
         {
             nextState = new GranadierChase(entity,agent,anim,player,stats);
             stage = EVENT.Exit;

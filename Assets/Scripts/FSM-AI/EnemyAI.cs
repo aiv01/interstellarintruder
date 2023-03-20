@@ -11,12 +11,14 @@ public class EnemyAI : MonoBehaviour
 
     public Transform player;
     public GranadierStats stats;
+    public List<Transform> waypoints;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentState = new GranadierIdle(gameObject, agent, anim, player,stats);
+
     }
 
     private void Update()

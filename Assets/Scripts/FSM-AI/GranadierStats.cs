@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[CreateAssetMenu(menuName ="FSM/Stats")]
 public class GranadierStats : ScriptableObject
 {
     public float visDist = 5.0f;

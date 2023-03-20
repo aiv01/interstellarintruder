@@ -14,13 +14,13 @@ public class GranadierChase : State
 
     public override void Enter()
     {
-
+        Debug.Log("Enter Chase");
         anim.SetBool("InPursuit",true);
         base.Enter();
     }
     public override void Update()
     {
-
+        
         agent.SetDestination(player.position);
 
         if (agent.hasPath)
@@ -43,6 +43,8 @@ public class GranadierChase : State
     }
     public override void Exit()
     {
+        Debug.Log("Exit Chase");
+        agent.isStopped = true;
         anim.SetBool("InPursuit", false);
         base.Exit();
     }
