@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapom;
 
 public class PlayerMgr : MonoBehaviour
 {
@@ -18,17 +19,27 @@ public class PlayerMgr : MonoBehaviour
 
     #region Private Variable
     private PlayerInput _playerInput;
+    private Gun _gunComponent;
     #endregion
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
+        _gunComponent = _gun.GetComponent<Gun>();
     }
 
     void Update()
     {
         if (_playerInput.Input.ChangeWeapon.triggered)
+        {
             _gun.SetActive(!_gun.activeSelf);
+        }
+
+        if (_playerInput.Input.Attack.triggered && _gun.activeSelf)
+        {
+            Debug.Log("Shoot");
+            _gunComponent.Shoot();
+        }
         if (_playerInput.Input.ChangeCamera.triggered)
             _topDownCamera.Priority *= -1;
     }
