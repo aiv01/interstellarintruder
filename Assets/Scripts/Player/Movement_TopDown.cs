@@ -33,10 +33,11 @@ public class Movement_TopDown : MonoBehaviour
 
     private void PlayerRotation()
     {
-        Vector3 mousePos = _playerInput.Input.MousePosition.ReadValue<Vector2>();
-        Vector3 direction = (mousePos - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x);
-        transform.eulerAngles = new Vector3(0, angle);
+        var mouse = _playerInput.Input.MousePosition.ReadValue<Vector2>();
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
+        var offset = new Vector2(mouse.x - screenPoint.x, mouse.y - screenPoint.y);
+        var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, -angle + 90, 0);
     }
 
     #region Enable Disable
