@@ -37,7 +37,6 @@ public class PlayerMgr : MonoBehaviour
 
         if (_playerInput.Input.Attack.triggered && _gun.activeSelf)
         {
-            Debug.Log("Shoot");
             _gunComponent.Shoot();
         }
         if (_playerInput.Input.ChangeCamera.triggered)

@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActiveSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1b93da9-b2f9-4e5d-a485-c7e59fa1dfe9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""ChangeCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3eb54a4e-56bf-44a1-8004-a6906e5bdba8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActiveSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Input_Attack = m_Input.FindAction("Attack", throwIfNotFound: true);
         m_Input_ChangeWeapon = m_Input.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Input_ChangeCamera = m_Input.FindAction("ChangeCamera", throwIfNotFound: true);
+        m_Input_ActiveSkill = m_Input.FindAction("ActiveSkill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Input_Attack;
     private readonly InputAction m_Input_ChangeWeapon;
     private readonly InputAction m_Input_ChangeCamera;
+    private readonly InputAction m_Input_ActiveSkill;
     public struct InputActions
     {
         private @PlayerInput m_Wrapper;
@@ -303,6 +325,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Input_Attack;
         public InputAction @ChangeWeapon => m_Wrapper.m_Input_ChangeWeapon;
         public InputAction @ChangeCamera => m_Wrapper.m_Input_ChangeCamera;
+        public InputAction @ActiveSkill => m_Wrapper.m_Input_ActiveSkill;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +353,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ChangeCamera.started -= m_Wrapper.m_InputActionsCallbackInterface.OnChangeCamera;
                 @ChangeCamera.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnChangeCamera;
                 @ChangeCamera.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnChangeCamera;
+                @ActiveSkill.started -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
+                @ActiveSkill.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
+                @ActiveSkill.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -352,6 +378,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ChangeCamera.started += instance.OnChangeCamera;
                 @ChangeCamera.performed += instance.OnChangeCamera;
                 @ChangeCamera.canceled += instance.OnChangeCamera;
+                @ActiveSkill.started += instance.OnActiveSkill;
+                @ActiveSkill.performed += instance.OnActiveSkill;
+                @ActiveSkill.canceled += instance.OnActiveSkill;
             }
         }
     }
@@ -364,5 +393,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
+        void OnActiveSkill(InputAction.CallbackContext context);
     }
 }
