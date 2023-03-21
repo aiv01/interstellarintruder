@@ -31,14 +31,11 @@ public class PlayerMgr : MonoBehaviour
     void Update()
     {
         if (_playerInput.Input.ChangeWeapon.triggered)
-        {
             _gun.SetActive(!_gun.activeSelf);
-        }
 
         if (_playerInput.Input.Attack.triggered && _gun.activeSelf)
-        {
             _gunComponent.Shoot();
-        }
+
         if (_playerInput.Input.ChangeCamera.triggered)
             _topDownCamera.Priority *= -1;
     }

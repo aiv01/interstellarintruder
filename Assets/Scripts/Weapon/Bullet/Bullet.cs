@@ -11,8 +11,9 @@ namespace Weapom.Projectile
 
         #region Private variables
         private float moveSpeed = 1.0f;
-        private float lifetime = 2.0f;
+        private float lifetime = 5.0f;
         private float age = 0.0f;
+        private float bulletDamage = 2.0f;
         #endregion
 
         void OnDisable()
@@ -25,6 +26,19 @@ namespace Weapom.Projectile
             if (age >= lifetime)
                 Die();
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                Die();
+                other.gameObject.GetComponent<PlayerStats>().HP -= bulletDamage;
+            }
+            if (other.gameObject.tag == "Enemy")
+            {
+                Die();
+            }
         }
 
         private void Die()

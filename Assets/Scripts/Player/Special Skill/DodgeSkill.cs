@@ -8,12 +8,10 @@ namespace PlayerFile.SpecialSkill
     {
         private PlayerInput _playerInput;
         private CharacterController _controller;
-        private Vector3 dodgeDirection;
+        private Vector3 dodgeDirection = new Vector3(1.5f, 0);
         private float distanceDodge = 1.5f;
         private float coolDown = 3.0f;
         private float timerCoolDown = 0.0f;
-        private float timeTeleport = 2.0f;
-        private float timerTeleport = 0.0f;
         private bool isTeleporting = false;
 
         private void Awake()
@@ -34,22 +32,23 @@ namespace PlayerFile.SpecialSkill
             if (!isTeleporting)
                 if (_playerInput.Input.ActiveSkill.triggered)
                 {
-                    dodgeDirection = _playerInput.Input.Move.ReadValue<Vector2>();
-                    _controller.Move(
-                            (
-                                dodgeDirection.x * transform.right + 
-                                dodgeDirection.y * transform.forward
-                            ) * 
-                        distanceDodge
-                        );
+                    isTeleporting = true;
+                    timerCoolDown = 0.0f;
+                    if (_playerInput.Input.Move.IsPressed())
+                    {
+                        dodgeDirection = _playerInput.Input.Move.ReadValue<Vector2>();
+                        _controller.Move(
+                                (
+                                    dodgeDirection.x * transform.right +
+                                    dodgeDirection.y * transform.forward
+                                ) *
+                            distanceDodge
+                            );
+                    }
+                    else
+                        _controller.Move(dodgeDirection);
                 }
             #endregion
-
-            timerTeleport += Time.deltaTime;
-            if(timerTeleport > timeTeleport)
-            {
-                isTeleporting = true;
-            }
         }
 
         #region Enable Disable

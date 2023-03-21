@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Movement_TopDown : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    #region SerializeField 
-    #endregion
-
     #region Private Variable
     private PlayerInput _playerInput;
     private CharacterController _controller;
     private Animator _animator;
 
-    private Vector2 inputVector;
+    private Vector3 inputVector;
     private float walkSpeed = 1.0f;
     private float runSpeed = 6.0f;
+    private float horizontalSpeedMouse = 2.0f;
+    private bool is3rdPerson = true;
     #endregion
 
     private void Awake()
@@ -28,16 +26,45 @@ public class Movement_TopDown : MonoBehaviour
     void Update()
     {
         Move();
-        PlayerRotation();
+        if (_playerInput.Input.ChangeCamera.triggered)
+            is3rdPerson = !is3rdPerson;
+
+        if (is3rdPerson)
+            PlayerRotation_3rdPerson();
+        else
+            PlayerRotation_TopDown();
     }
 
-    private void PlayerRotation()
+    #region Rotation
+    private void PlayerRotation_TopDown()
     {
         var mouse = _playerInput.Input.MousePosition.ReadValue<Vector2>();
         var screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
         var offset = new Vector2(mouse.x - screenPoint.x, mouse.y - screenPoint.y);
         var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, -angle + 90, 0);
+    }
+
+    private void PlayerRotation_3rdPerson()
+    {
+        transform.Rotate(new Vector3(0, horizontalSpeedMouse * Input.GetAxis("Mouse X")));
+    }
+    #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bulelt")
+        {
+            if (other.transform.position.x < transform.position.x)
+                _animator.SetFloat("HurtFromX", -1);
+            else if (other.transform.position.x > transform.position.x)
+                _animator.SetFloat("HurtFromX", 1);
+
+            if (other.transform.position.y < transform.position.y)
+                _animator.SetFloat("HurtFromY", -1);
+            else if (other.transform.position.y > transform.position.y)
+                _animator.SetFloat("HurtFromY", 1);
+        }
     }
 
     #region Enable Disable
@@ -63,8 +90,11 @@ public class Movement_TopDown : MonoBehaviour
             WalkMove();
 
         _controller.Move(
-            _animator.GetFloat("ForwardSpeed") * Time.deltaTime * _controller.transform.forward +
-            _animator.GetFloat("HorizontalSpeed") * Time.deltaTime * _controller.transform.right
+                (
+                    _animator.GetFloat("ForwardSpeed") * _controller.transform.forward +
+                    _animator.GetFloat("HorizontalSpeed") * _controller.transform.right
+                ) *
+                Time.deltaTime
             );
     }
 

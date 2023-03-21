@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AttackPlayer : MonoBehaviour
 {
     #region Private Variable
     private PlayerInput _playerInput;
-    private CharacterController _controller;
     private Animator _animator;
 
     private bool attackMelee = true;
@@ -16,7 +14,6 @@ public class AttackPlayer : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _animator = GetComponent<Animator>();
-        _controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -33,6 +30,11 @@ public class AttackPlayer : MonoBehaviour
                 _animator.SetTrigger("RangedAttack");
             else
                 _animator.SetTrigger("MeleeAttack");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Menu Change Scene");
         }
     }
 
