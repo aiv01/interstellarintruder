@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/AiTest.unity
+    guid: 47a118ae7567e074191de271804fdc08
+  - enabled: 1
+    path: Assets/Scenes/InteractableTest.unity
+    guid: 54a732677845706478444fb55bad715e
+  - enabled: 1
+    path: Assets/Scenes/MapTest.unity
+    guid: 9bd344e966b41554ba6f8ffe1bec336e
+  - enabled: 1
+    path: Assets/Scenes/Menu Change Scene.unity
+    guid: 5920587efae01ac43a30b250e129d724
+  - enabled: 1
+    path: Assets/Scenes/Player Scene.unity
+    guid: e24e9263dc46fe248b3f04b1d38cf45e
   m_configObjects: {}

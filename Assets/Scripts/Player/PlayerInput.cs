@@ -89,6 +89,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd007744-c1d6-4c20-80d8-5f2e31379cfd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""50c4ed3c-e8be-484a-9b7f-ba0dc322160b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,7 +190,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""19a87221-450d-40ed-9015-719622568e51"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -205,7 +223,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8f516549-55f0-400a-b456-fdc3587e5387"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -226,8 +244,30 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b2cb42f6-483f-4962-8f7f-011597ff5490"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""94300e17-b998-4dcc-994d-f870f17b9439"",
                     ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07001688-b2bd-4df3-9a84-eeaec3a9fa5a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -245,6 +285,61 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""ActiveSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f5f0fe7-63da-43b6-bde9-0dfd85f8953a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActiveSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4652c3d2-043a-4835-8e7a-e13d45e43c22"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15897c41-7d6e-4832-92ae-8cce49764d04"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43cfd95d-bf48-45c8-a577-feac44eb9baa"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22987c43-5a0a-499e-8070-aea47b75daa0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +355,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Input_ChangeWeapon = m_Input.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Input_ChangeCamera = m_Input.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Input_ActiveSkill = m_Input.FindAction("ActiveSkill", throwIfNotFound: true);
+        m_Input_Interaction = m_Input.FindAction("Interaction", throwIfNotFound: true);
+        m_Input_Esc = m_Input.FindAction("Esc", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,6 +423,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Input_ChangeWeapon;
     private readonly InputAction m_Input_ChangeCamera;
     private readonly InputAction m_Input_ActiveSkill;
+    private readonly InputAction m_Input_Interaction;
+    private readonly InputAction m_Input_Esc;
     public struct InputActions
     {
         private @PlayerInput m_Wrapper;
@@ -337,6 +436,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @ChangeWeapon => m_Wrapper.m_Input_ChangeWeapon;
         public InputAction @ChangeCamera => m_Wrapper.m_Input_ChangeCamera;
         public InputAction @ActiveSkill => m_Wrapper.m_Input_ActiveSkill;
+        public InputAction @Interaction => m_Wrapper.m_Input_Interaction;
+        public InputAction @Esc => m_Wrapper.m_Input_Esc;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +468,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ActiveSkill.started -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
                 @ActiveSkill.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
                 @ActiveSkill.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnActiveSkill;
+                @Interaction.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInteraction;
+                @Esc.started -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
+                @Esc.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
+                @Esc.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -392,6 +499,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ActiveSkill.started += instance.OnActiveSkill;
                 @ActiveSkill.performed += instance.OnActiveSkill;
                 @ActiveSkill.canceled += instance.OnActiveSkill;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
+                @Esc.started += instance.OnEsc;
+                @Esc.performed += instance.OnEsc;
+                @Esc.canceled += instance.OnEsc;
             }
         }
     }
@@ -405,5 +518,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
         void OnActiveSkill(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnEsc(InputAction.CallbackContext context);
     }
 }

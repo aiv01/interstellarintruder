@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDirection: 4
   roomManager: {fileID: 0}
+  test: 0
 --- !u!1 &462542396 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8511273144312171618, guid: 27f477403e639d94a9bca0062d10b869, type: 3}
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDirection: 1
   roomManager: {fileID: 0}
+  test: 0
 --- !u!1 &504245300 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 892931112635188393, guid: 27f477403e639d94a9bca0062d10b869, type: 3}
@@ -321,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDirection: 2
   roomManager: {fileID: 0}
+  test: 0
 --- !u!1 &565398157 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100018, guid: 7d3c05bccd7388942bcf8215cf4481c2, type: 3}
@@ -565,6 +568,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3385335296332761134, guid: 27f477403e639d94a9bca0062d10b869, type: 3}
   m_PrefabInstance: {fileID: 230305622}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1486966774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1486966776}
+  - component: {fileID: 1486966775}
+  m_Layer: 0
+  m_Name: GameMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1486966775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486966774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79d84192a59d994b9cb4780a5cbd55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1486966776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486966774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614430744
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorDirection: 8
   roomManager: {fileID: 0}
+  test: 0
 --- !u!1 &2054324525
 GameObject:
   m_ObjectHideFlags: 0
