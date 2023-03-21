@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractSwitch : Interactable
 {
     
-    private void Update()
+    private void OnTriggerStay()
     {
         if (false)
         {

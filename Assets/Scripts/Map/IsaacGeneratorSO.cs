@@ -1,19 +1,24 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
-    
-    public class IsaacGeneratorSO : MonoBehaviour{
-        public string folderPath = "";
+
+public class IsaacGeneratorSO : MonoBehaviour{
+        [SerializeField]    
+        private string folderPath = "";
+        
         public Transform tr;
-        public Vector2 offset;
+        [SerializeField]
+        private Vector2 offset;
         private IsaacTileInfo[,] tileInfo;
         public IsaacTileInfo[,] TileInfo
-    {
+        {
         get { return tileInfo; }
-    }
-        IsaacTile[,] tiles;
+        
+        }
+        public IsaacTile[,] tiles;
         Queue<Vector2Int> tilesQueue;
         int CellNum = 0;
         public int level = 1;
@@ -67,27 +72,9 @@ using UnityEngine;
                 }
                 tilesQueue.Enqueue(tilePosition);
             }
-        
-            for(int y = 0; y < width; y++)
-            {
-                for(int x = 0; x < height; x++)
-                {
-                    
-                    if (tiles[y, x] != null)
-                    {
 
-                    //var path = folderPath + " " + tiles[y, x].doors;
-                    var path = folderPath;
-                        var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
-                        var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
-                        tiles[y, x].info = tilePrefab;
-                    }
-                    
-                    
-                }
-                
-            }
-            
+
+            BuildMap(container, width, height);
             DrawMap(container, width, height);
         }
         private void DrawMap(Transform container, int width, int height)
@@ -100,7 +87,7 @@ using UnityEngine;
                     if (tiles[col, row] != null)
                     {
                         var go = Instantiate(tiles[col, row].info, container);
-                        go.gameObject.SetActive(false);
+                        //go.gameObject.SetActive(false);
                         go.name = "Tile " + col + ", " + row;
                         go.transform.localPosition = new Vector3(col * offset.x, 0, row * offset.y);
                         tileInfo[col,row] = go;
@@ -108,6 +95,44 @@ using UnityEngine;
                 }
             }
         }
+        public void BuildMap(Transform container, int width, int height)
+    {
+        for (int y = 0; y < width; y++)
+        {
+            for (int x = 0; x < height; x++)
+            {
+
+                if (tiles[y, x] != null)
+                {
+
+                    //var path = folderPath + " " + tiles[y, x].doors;
+                    var path = folderPath;
+                    var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
+                    var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
+                    tiles[y, x].info = tilePrefab;
+                }
+
+
+            }
+
+        }
+    }
+    public void LoadMap(Transform container, TileMapData data)
+        {
+        tiles = new IsaacTile[data.dimensions.x, data.dimensions.y];
+        foreach (var info in data.tiles)
+        {
+            IsaacTile tile = new IsaacTile();
+           
+            tile.doors = info.doors;
+            //var path = folderPath + " " + tiles[y, x].doors + info.tileId;;
+            var path = folderPath;
+            var tilePrefab = Resources.LoadAll<IsaacTileInfo>(path);
+            tile.info = tilePrefab[0];
+            tiles[info.pos.x, info.pos.y] = tile;
+        }
+        DrawMap(container, data.dimensions.x, data.dimensions.y);
+    }
         public bool HasNeibourg(Vector2Int pos)
         {
             Vector2Int newpos;
@@ -146,7 +171,9 @@ using UnityEngine;
             South = 4,
             West = 8,
         }
-        class IsaacTile
+
+    
+    public class IsaacTile
         {
             public int doors = 0;
             public IsaacTileInfo info;

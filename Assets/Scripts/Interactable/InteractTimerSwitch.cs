@@ -7,8 +7,8 @@ public class InteractTimerSwitch : Interactable
 {
     private float timeRemaining = 0.0f;
     public float timeTotal = 1.0f;
-
-    private void Update()
+    public bool testBool;
+    private void OnTriggerStay()
     {
         if (false)
         {
@@ -18,12 +18,25 @@ public class InteractTimerSwitch : Interactable
             timeRemaining = timeTotal;
         }
 
-        if(status)
+       
+    }
+
+    private void Update()
+    {
+        if (testBool && !status)
         {
-            if(timeRemaining <= 0.0f)
+
+            ChangeStatus();
+            myEvent.Invoke(status);
+            timeRemaining = timeTotal;
+        }
+        if (status)
+        {
+            if (timeRemaining <= 0.0f)
             {
                 ChangeStatus();
                 myEvent.Invoke(status);
+                testBool = false;
             }
             timeRemaining -= Time.deltaTime;
         }

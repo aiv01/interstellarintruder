@@ -17,10 +17,11 @@ public class RoomManager : MonoBehaviour
     public void Init()
     {
         isaacTileInfos = GameObject.FindObjectOfType<IsaacGeneratorSO>().TileInfo;
-        tilePos = new Vector2Int(isaacTileInfos.GetLength(0), isaacTileInfos.GetLength(1));
+        tilePos = new Vector2Int(isaacTileInfos.GetLength(0)/2, isaacTileInfos.GetLength(1)/2);
         currentTile = isaacTileInfos[tilePos.x, tilePos.y];
         currentTile.gameObject.SetActive(true);
         currentTile.SpawnAll();
+        ActivateDoors(currentTile.visited);
     }
     public void DoorWarp (isaacDoorDirection doorDirection)
     {
@@ -66,7 +67,16 @@ public class RoomManager : MonoBehaviour
         }
         currentTile.DespawnAll();
         currentTile.gameObject.SetActive(false);
-        nextTile = currentTile;
-        nextTile = null;
+        currentTile = nextTile;
+        
+        ActivateDoors(currentTile.visited);
+    }
+
+    public void ActivateDoors(bool status)
+    {
+        foreach(Door door in currentTile.Doors)
+        {
+            door.OpenCloseDoor(status);
+        }
     }
 }
