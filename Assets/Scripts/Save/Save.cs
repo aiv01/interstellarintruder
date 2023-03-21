@@ -7,7 +7,9 @@ using UnityEngine;
 public class Save : MonoBehaviour
 {
     public IsaacGeneratorSO gen;
-    private string file = "save.txt";
+    public PlayerStats stats;
+    private string file = "map.sav";
+    private string playerSav = "player.sav";
     public bool save;
     public bool load;
 
@@ -26,7 +28,7 @@ public class Save : MonoBehaviour
     }
     public void SaveGen()
     {
-        TileMapData data = new TileMapData(new Vector2Int(gen.tiles.GetLength(0), gen.tiles.GetLength(1)));
+        TileMapData data = new TileMapData(new Vector2Int(gen.tiles.GetLength(0), gen.tiles.GetLength(1)), gen.level);
         TileInfo info;
         for (int y = 0; y < gen.tiles.GetLength(0); y++)
         {
@@ -46,8 +48,10 @@ public class Save : MonoBehaviour
     public void LoadGen()
     {
         TileMapData data = FileHandler.ReadFromJSON<TileMapData>(file);
+        //gamemanager.level = data.level;
         gen.LoadMap(gen.tr, data);
     }
+
 }
 
 [Serializable]
@@ -55,10 +59,12 @@ public class TileMapData
 {
     public List<TileInfo> tiles;
     public Vector2Int dimensions;
-    public TileMapData(Vector2Int dimensions)
+    public int level;
+    public TileMapData(Vector2Int dimensions, int level)
     {
         tiles = new List<TileInfo>();
         this.dimensions = dimensions;
+        this.level = level;
     }
 }
 
