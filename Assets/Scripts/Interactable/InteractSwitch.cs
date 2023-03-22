@@ -18,9 +18,9 @@ public class InteractSwitch : Interactable
     {
         input.Disable();
     }
-    private void OnTriggerStay()
+    private void OnTriggerStay(Collider other)
     {
-        if (input.Input.Interaction.ReadValue<bool>())
+        if (input.Input.Interaction.ReadValue<float>() > 0 && other.CompareTag("Player"))
         {
             
             ChangeStatus();

@@ -25,7 +25,7 @@ public class InteractTimerSwitch : Interactable
     }
     private void OnTriggerStay(Collider other)
     {
-        if (input.Input.Interaction.ReadValue<bool>() && other.tag == "Player")
+        if (input.Input.Interaction.ReadValue<float>() >0 && other.CompareTag("Player"))
         {
             
             ChangeStatus();
