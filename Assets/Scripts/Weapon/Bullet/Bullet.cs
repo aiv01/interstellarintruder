@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Weapom.Projectile
 {
@@ -38,6 +39,7 @@ namespace Weapom.Projectile
             if (other.gameObject.tag == "Enemy")
             {
                 Die();
+                other.gameObject.GetComponent<GranadierStats>().healthPoint -= bulletDamage;
             }
         }
 

@@ -22,7 +22,11 @@ public class GranadierChase : State
     {
         
         agent.SetDestination(player.position);
-
+        if (Die())
+        {
+            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            stage = EVENT.Exit;
+        }
         if (agent.hasPath)
         {
             if (CanMeleePlayer())

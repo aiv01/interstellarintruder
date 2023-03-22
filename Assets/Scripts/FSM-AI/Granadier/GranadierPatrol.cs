@@ -47,6 +47,11 @@ public class GranadierPatrol : State
             }
             agent.SetDestination(waypoints[currentIndex].position);
         }
+        if (Die())
+        {
+            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            stage = EVENT.Exit;
+        }
 
         if (CanSeePlayer())
         {

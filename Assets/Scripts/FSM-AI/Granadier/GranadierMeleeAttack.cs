@@ -20,6 +20,11 @@ public class GranadierMeleeAttack : State
     {
         Debug.Log("Melee");
         //Melee attack logic
+        if (Die())
+        {
+            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            stage = EVENT.Exit;
+        }
         if (CanShootPlayer())
         {
             nextState = new GranadierRangeAttack(entity, agent, anim, player, stats);

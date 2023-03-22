@@ -101,5 +101,10 @@ public class State
         }
         return false;
     }
+
+    public bool Die()
+    {
+        return stats.healthPoint <= 0.0f;
+    }
     
 }

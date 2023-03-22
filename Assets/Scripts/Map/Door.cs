@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.UI;
 
 [System.Serializable]
@@ -11,6 +12,7 @@ public class MyDoorEvent : UnityEvent<isaacDoorDirection>
 }
 public class Door : MonoBehaviour
 {
+    public PlayerInput input;
     public isaacDoorDirection doorDirection;
     private bool doorOpen = false;
     private MyDoorEvent doorEvent;
@@ -27,8 +29,11 @@ public class Door : MonoBehaviour
             return animator;
         }
     }
-    public bool test;
 
+    public void Awake()
+    {
+        input = new PlayerInput();
+    }
     public void Start()
     {
         if(roomManager == null) roomManager = RoomManager.FindObjectOfType<RoomManager>();
@@ -62,24 +67,24 @@ public class Door : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //If Input
+        if(input.Input.Interaction.ReadValue<bool>() && other.tag == "Player")
         doorEvent.Invoke(doorDirection);
         
     }
 
-    private void Update()
-    {
-        if (test && doorOpen)
-        {
-            test = false;
-            doorEvent.Invoke(doorDirection);
-            
-        }
-    }
+   
 
     public void OpenCloseDoor(bool status)
     {
         doorOpen = status;
         Animator.SetBool("open", status);
+    }
+    private void OnEnable()
+    {
+        input.Enable();
+    }
+    private void OnDisable()
+    {
+        input.Disable();
     }
 }

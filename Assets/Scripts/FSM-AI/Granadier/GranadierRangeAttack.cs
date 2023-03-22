@@ -32,7 +32,11 @@ public class GranadierRangeAttack : State
         {
             //shoot event
         }
-
+        if (Die())
+        {
+            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            stage = EVENT.Exit;
+        }
         if (CanMeleePlayer())
         {
             nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats);

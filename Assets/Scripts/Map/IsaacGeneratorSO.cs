@@ -22,9 +22,15 @@ public class IsaacGeneratorSO : MonoBehaviour{
         Queue<Vector2Int> tilesQueue;
         int CellNum = 0;
         public int level = 1;
+    
+    public void GenerateMap()
+    {
+        DestroyMap();
+        Generate(tr, 10, 10);
+    }
     private void Start()
     {
-        Generate(tr, 10, 10);
+        GenerateMap();
     }
     public void Generate(Transform container, int width, int height)
         {
@@ -117,6 +123,10 @@ public class IsaacGeneratorSO : MonoBehaviour{
 
         }
     }
+    public void DestroyMap()
+    {
+        tr.DestroyAllChildrenImmediate();
+    }
     public void LoadMap(Transform container, TileMapData data)
         {
         tiles = new IsaacTile[data.dimensions.x, data.dimensions.y];
@@ -161,7 +171,8 @@ public class IsaacGeneratorSO : MonoBehaviour{
                     return oldPos;
             }
         }
-    }
+       
+}
         [Flags]
         public enum isaacDoorDirection : int
         {
@@ -172,8 +183,8 @@ public class IsaacGeneratorSO : MonoBehaviour{
             West = 8,
         }
 
-    
-    public class IsaacTile
+
+public class IsaacTile
         {
             public int doors = 0;
             public IsaacTileInfo info;

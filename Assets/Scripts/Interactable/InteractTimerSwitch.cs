@@ -2,15 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class InteractTimerSwitch : Interactable
 {
+    public PlayerInput input;
     private float timeRemaining = 0.0f;
     public float timeTotal = 1.0f;
     public bool testBool;
-    private void OnTriggerStay()
+    public void Awake()
     {
-        if (false)
+        input = new PlayerInput();
+    }
+    private void OnEnable()
+    {
+        input.Enable();
+    }
+    private void OnDisable()
+    {
+        input.Disable();
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (input.Input.Interaction.ReadValue<bool>() && other.tag == "Player")
         {
             
             ChangeStatus();
@@ -20,6 +35,8 @@ public class InteractTimerSwitch : Interactable
 
        
     }
+
+    
 
     private void Update()
     {

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4b23e59efcbf3488a6cb24635aaa54, type: 3}
   m_Name: Base Granadier
   m_EditorClassIdentifier: 
-  visDist: 10
+  visDist: 5
   nearDist: 1
   visAngle: 35
-  rangeDist: 8
+  rangeDist: 4
   meleeDist: 1
   speed: 2
   chaseSpeed: 4
   rotationSpeed: 2
+  healthPoint: 10

@@ -45,6 +45,19 @@ public class Save : MonoBehaviour
         }
         FileHandler.SaveToJSON(data, file);
     }
+    public void SavePlayer()
+    {
+        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement);
+        FileHandler.SaveToJSON(info, playerSav);
+    }
+    public void LoadPlayer()
+    {
+        PlayerInfo info = FileHandler.ReadFromJSON<PlayerInfo>(playerSav);
+        stats.HP = info.hp;
+        stats.Attack = info.attackDamage;
+        stats.SpeedAttack = info.attackSpeed;
+        stats.SpeedMovement = info.speedMovement;
+    }
     public void LoadGen()
     {
         TileMapData data = FileHandler.ReadFromJSON<TileMapData>(file);
@@ -82,6 +95,22 @@ public class TileInfo
         this.tileId = tileId;
         this.visitedTile = visitedTile;
         this.pos = pos;
+    }
+}
+[Serializable]
+public class PlayerInfo
+{
+    public float hp;
+    public float attackDamage;
+    public float attackSpeed;
+    public float speedMovement;
+
+    public PlayerInfo(float hp, float attackDamage, float attackSpeed, float speedMovement)
+    {
+        this.hp = hp;
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
+        this.speedMovement = speedMovement;
     }
 }
 
