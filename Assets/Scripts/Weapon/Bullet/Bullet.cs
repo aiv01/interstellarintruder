@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-namespace Weapom.Projectile
+namespace Weapon.Projectile
 {
     public class Bullet : MonoBehaviour
     {
@@ -21,12 +21,13 @@ namespace Weapom.Projectile
         {
             age = 0.0f;
         }
+
         void Update()
         {
             age += Time.deltaTime;
             if (age >= lifetime)
                 Die();
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            transform.position += transform.right * moveSpeed * Time.deltaTime;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,12 +35,14 @@ namespace Weapom.Projectile
             if (other.gameObject.tag == "Player")
             {
                 Die();
-                other.gameObject.GetComponent<PlayerStats>().HP -= bulletDamage;
+                var _playerStats = other.gameObject.GetComponent<PlayerStats>();
+                _playerStats.HP -= ((bulletDamage * _playerStats.Attack / 100) + bulletDamage);
             }
             if (other.gameObject.tag == "Enemy")
             {
                 Die();
-                other.gameObject.GetComponent<GranadierStats>().healthPoint -= bulletDamage;
+                var _enemyStats = other.gameObject.GetComponent<GranadierStats>();
+                _enemyStats.healthPoint -= ((bulletDamage * _enemyStats.attackDamage / 100) + bulletDamage);
             }
         }
 

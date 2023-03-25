@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Weapom.Projectile
+namespace Weapon.Projectile
 {
     public class BulletPool : MonoBehaviour
     {
@@ -33,7 +33,6 @@ namespace Weapom.Projectile
             if (retval == null)
                 retval = CreateInstance();
             retval.gameObject.SetActive(true);
-            retval.transform.SetParent(null);
             return retval;
         }
 

@@ -200,8 +200,19 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""035c7b08-94bd-4735-85f4-64de7d5ba637"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""e257196f-9a68-451c-a53a-c7983425552e"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2aaa00b-83df-4e7c-83f8-d63b691edf72"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

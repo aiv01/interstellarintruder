@@ -6,6 +6,7 @@ public class AttackPlayer : MonoBehaviour
     #region Private Variable
     private PlayerInput _playerInput;
     private Animator _animator;
+    private PlayerMgr _playerMgr;
 
     private bool attackMelee = true;
     #endregion
@@ -14,6 +15,7 @@ public class AttackPlayer : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _animator = GetComponent<Animator>();
+        _playerMgr = GetComponentInParent<PlayerMgr>();
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class AttackPlayer : MonoBehaviour
 
         if(_playerInput.Input.Attack.triggered)
         {
-            if(!attackMelee)
+            if(!attackMelee && _playerMgr.CanShoot)
                 _animator.SetTrigger("RangedAttack");
             else
                 _animator.SetTrigger("MeleeAttack");

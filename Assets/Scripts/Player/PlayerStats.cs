@@ -20,7 +20,7 @@ public class PlayerStats : MonoBehaviour
     private float currentSpeedMovement = 1.0f;
     #endregion
 
-    #region Propriety
+    #region Property
     public float HP
     {
         get { return totalHP; }

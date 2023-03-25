@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 inputVector;
     private float walkSpeed = 1.0f;
     private float runSpeed = 6.0f;
-    private float horizontalSpeedMouse = 2.0f;
     private bool is3rdPerson = true;
     #endregion
 
@@ -47,13 +46,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerRotation_3rdPerson()
     {
-        transform.Rotate(new Vector3(0, horizontalSpeedMouse * Input.GetAxis("Mouse X")));
+        var mouse = _playerInput.Input.MousePosition.ReadValue<Vector2>();
+        transform.Rotate(new Vector3(0, mouse.x));
     }
     #endregion
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bulelt")
+        if (other.gameObject.tag == "Bullet")
         {
             if (other.transform.position.x < transform.position.x)
                 _animator.SetFloat("HurtFromX", -1);
