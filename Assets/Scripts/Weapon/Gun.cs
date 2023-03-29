@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Weapon.Projectile;
 
@@ -19,6 +17,9 @@ namespace Weapon
         #endregion
 
         #region Private Variable
+        private Camera _camera;
+        private PlayerMgr _playerMgr;
+
         private float shootCoolDown = 0.2f;
         private float lastFire = -10.0f;
         private float reloadTime = 5.0f;
@@ -27,29 +28,23 @@ namespace Weapon
         private int counterAmmo;
         #endregion
 
-        #region Propriety
-        private bool isRanged = false;
-        public bool IsRanged
-        {
-            get => isRanged;
-            set { isRanged = value; }
-        }
-        #endregion
-
         private void Start()
         {
+            _playerMgr = GetComponentInParent<PlayerMgr>();
+        }
+
+        private void Awake()
+        {
             counterAmmo = ammo;
+            _camera = Camera.main;
         }
 
         void Update()
         {
-            if (IsRanged)
-                GunPosition();
+            if (!_playerMgr.IsMelee)
+                GunShootPosition();
             else
-            {
-                transform.position = _gunHoldPosition.position;
-                transform.rotation = _gunHoldPosition.rotation;
-            }
+                GunHoldPosition();
 
             if(counterAmmo < 0)
             {
@@ -63,10 +58,16 @@ namespace Weapon
         }
 
         #region Private Method
-        private void GunPosition()
+        private void GunShootPosition()
         {
             transform.position = _handPlayer.transform.position;
             transform.right = _handPlayer.transform.right;
+        }
+
+        private void GunHoldPosition()
+        {
+            transform.position = _gunHoldPosition.position;
+            transform.rotation = _gunHoldPosition.rotation;
         }
 
         private void Shoot()
@@ -77,7 +78,25 @@ namespace Weapon
 
             Bullet instance = bulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
-            instance.transform.rotation = _handPlayer.transform.rotation;
+            instance.transform.forward = transform.right;
+            if(_playerMgr.Is3rdPerson)
+                Aim(instance);
+        }
+
+        private void Aim(Bullet instance)
+        {
+            float screenX = Screen.width / 2;
+            float screenY = Screen.height / 2;
+
+            RaycastHit hit;
+            Ray ray = _camera.ScreenPointToRay(new Vector3(screenX, screenY));
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 aimSpot = _camera.transform.position;
+                aimSpot += _camera.transform.forward * 50.0f;
+                instance.transform.LookAt(aimSpot);
+            }
         }
         #endregion
 

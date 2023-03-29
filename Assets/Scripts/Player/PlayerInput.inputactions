@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "e9f8912a-622d-48f7-bbac-ee24c2455a5e",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "498897fd-d9fc-438e-b605-f8391c352f6c",
@@ -85,6 +76,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Rotation_TopDown",
+                    "type": "Value",
+                    "id": "e9f8912a-622d-48f7-bbac-ee24c2455a5e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotation_3rdPerson",
+                    "type": "Value",
+                    "id": "6f20e580-3278-4f51-a2e8-ef747ba3fc49",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RotationGamePad",
+                    "type": "Value",
+                    "id": "3477fa7b-b80d-45d4-bc77-d8cedefc18b0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -173,28 +191,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Run",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e257196f-9a68-451c-a53a-c7983425552e",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MousePosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f2aaa00b-83df-4e7c-83f8-d63b691edf72",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -327,6 +323,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8e22ea2-8294-4079-97a1-37849db1e562",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation_3rdPerson",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e257196f-9a68-451c-a53a-c7983425552e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation_TopDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0235e17-3cc3-42d7-84dc-e49ec3c62e1e",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotationGamePad",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

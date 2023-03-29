@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Stats.Health;
 using UnityEngine;
-using UnityEngine.Windows;
 
 namespace Weapon.Projectile
 {
@@ -27,22 +25,16 @@ namespace Weapon.Projectile
             age += Time.deltaTime;
             if (age >= lifetime)
                 Die();
-            transform.position += transform.right * moveSpeed * Time.deltaTime;
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
             {
                 Die();
-                var _playerStats = other.gameObject.GetComponent<PlayerStats>();
-                _playerStats.HP -= ((bulletDamage * _playerStats.Attack / 100) + bulletDamage);
-            }
-            if (other.gameObject.tag == "Enemy")
-            {
-                Die();
-                var _enemyStats = other.gameObject.GetComponent<GranadierStats>();
-                _enemyStats.healthPoint -= ((bulletDamage * _enemyStats.attackDamage / 100) + bulletDamage);
+                var stats = other.gameObject.GetComponent<StatsModule>();
+                stats.Health -= ((bulletDamage * stats.Damage / 100) + bulletDamage);
             }
         }
 

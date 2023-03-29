@@ -47,14 +47,14 @@ public class Save : MonoBehaviour
     }
     public void SavePlayer()
     {
-        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement);
+        PlayerInfo info = new PlayerInfo(stats.Health, stats.Damage, stats.SpeedAttack, stats.SpeedMovement);
         FileHandler.SaveToJSON(info, playerSav);
     }
     public void LoadPlayer()
     {
         PlayerInfo info = FileHandler.ReadFromJSON<PlayerInfo>(playerSav);
-        stats.HP = info.hp;
-        stats.Attack = info.attackDamage;
+        stats.Health = info.hp;
+        stats.Damage = info.attackDamage;
         stats.SpeedAttack = info.attackSpeed;
         stats.SpeedMovement = info.speedMovement;
     }

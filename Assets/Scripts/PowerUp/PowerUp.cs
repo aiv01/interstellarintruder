@@ -14,12 +14,10 @@ namespace PowerUp
         #endregion
 
         private PlayerStats _playerStats;
-        private Text _textHP;
 
         private void Awake()
         {
             _playerStats = GameObject.Find("Ellen").GetComponent<PlayerStats>();
-            _textHP = GameObject.Find("HP Player").GetComponent<Text>();
         }
 
         protected void Despawn()
@@ -30,13 +28,12 @@ namespace PowerUp
         #region Protected Event
         protected void HP_Up(float amount)
         {
-            _playerStats.HP += amount;
-            _textHP.text = _playerStats.HP.ToString();
+            _playerStats.Health += amount;
         }
 
         protected void AttackUp_Stat(float amount)
         {
-            _playerStats.Attack += amount;
+            _playerStats.Damage += amount;
         }
 
         protected void SpeedMovementUp_Stat(float amount)

@@ -10,8 +10,8 @@ public class HP_Text : MonoBehaviour
     [SerializeField]
     private PlayerStats _stats;
 
-    void Start()
+    private void Update()
     {
-        _text.text += _stats.HP.ToString();
+        _text.text = _stats.Health.ToString();
     }
 }

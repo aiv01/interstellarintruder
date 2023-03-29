@@ -37,6 +37,7 @@ namespace PlayerFile.SpecialSkill
             {
                 isTeleporting = true;
                 timerCoolDown = 0.0f;
+                ControlDistanceDodge();
                 _controller.Move(
                             (
                                 lastDirection.x * transform.right +
@@ -46,6 +47,19 @@ namespace PlayerFile.SpecialSkill
                 );
             }
             #endregion
+        }
+
+        private void ControlDistanceDodge()
+        {
+            if (lastDirection.x > 0.1)
+                lastDirection.x = 1;
+            else if(lastDirection.x < -0.1)
+                lastDirection.x = -1;
+
+            if (lastDirection.y > 0.1)
+                lastDirection.y = 1;
+            else if (lastDirection.y < -0.1)
+                lastDirection.y = -1;
         }
 
         #region Enable Disable

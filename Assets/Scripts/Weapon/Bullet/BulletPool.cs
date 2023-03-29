@@ -23,17 +23,17 @@ namespace Weapon.Projectile
 
         public Bullet GetBullet()
         {
-            Bullet retval = null;
+            Bullet val = null;
             foreach (Bullet projectile in pool)
                 if (!projectile.gameObject.activeSelf)
                 {
-                    retval = projectile;
+                    val = projectile;
                     break;
                 }
-            if (retval == null)
-                retval = CreateInstance();
-            retval.gameObject.SetActive(true);
-            return retval;
+            if (val == null)
+                val = CreateInstance();
+            val.gameObject.SetActive(true);
+            return val;
         }
 
         private void FillPool()
