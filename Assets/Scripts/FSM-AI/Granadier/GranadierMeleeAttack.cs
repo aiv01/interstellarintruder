@@ -19,6 +19,7 @@ public class GranadierMeleeAttack : State
     public override void Update()
     {
         Debug.Log("Melee");
+        anim.SetTrigger("MeleeAttack");
         //Melee attack logic
         if (Die())
         {

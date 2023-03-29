@@ -45,9 +45,9 @@ public class Save : MonoBehaviour
         }
         FileHandler.SaveToJSON(data, file);
     }
-    public void SavePlayer()
+    public void SavePlayer(Vector2Int pos)
     {
-        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement);
+        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement, pos);
         FileHandler.SaveToJSON(info, playerSav);
     }
     public void LoadPlayer()
@@ -104,13 +104,15 @@ public class PlayerInfo
     public float attackDamage;
     public float attackSpeed;
     public float speedMovement;
+    public Vector2Int currentRoom;
 
-    public PlayerInfo(float hp, float attackDamage, float attackSpeed, float speedMovement)
+    public PlayerInfo(float hp, float attackDamage, float attackSpeed, float speedMovement, Vector2Int currentRoom)
     {
         this.hp = hp;
         this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.speedMovement = speedMovement;
+        this.currentRoom = currentRoom;
     }
 }
 

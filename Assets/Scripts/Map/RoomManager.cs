@@ -6,17 +6,20 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public IsaacTileInfo[,] isaacTileInfos;
+    public Save saveMgr;
     public Transform player;
     private Vector2Int tilePos;
     private IsaacTileInfo currentTile;
     private IsaacTileInfo nextTile;
+    private float secondToWait = 0.5f;
+    private float secondPassed = 0.0f;
     private void Start()
     {
         Init();
     }
     public void Init()
     {
-        isaacTileInfos = GameObject.FindObjectOfType<IsaacGeneratorSO>().TileInfo;
+        isaacTileInfos = GetComponent<IsaacGeneratorSO>().TileInfo;
         tilePos = new Vector2Int(isaacTileInfos.GetLength(0)/2, isaacTileInfos.GetLength(1)/2);
         currentTile = isaacTileInfos[tilePos.x, tilePos.y];
         currentTile.gameObject.SetActive(true);
@@ -70,6 +73,8 @@ public class RoomManager : MonoBehaviour
         currentTile = nextTile;
         
         ActivateDoors(currentTile.visited);
+        saveMgr.SavePlayer(tilePos);
+        saveMgr.SaveGen();
     }
 
     public void ActivateDoors(bool status)
@@ -78,5 +83,18 @@ public class RoomManager : MonoBehaviour
         {
             door.OpenCloseDoor(status);
         }
+    }
+    private void Update()
+    {
+        if(secondPassed > secondToWait)
+        {
+            if(currentTile.enemyCounter <= 0 && currentTile.interactable)
+            {
+                ActivateDoors(true);
+                currentTile.visited = true;
+            }
+            secondPassed = 0.0f;
+        }
+        secondPassed += Time.deltaTime;
     }
 }

@@ -39,7 +39,7 @@ public class GranadierChase : State
                 stage = EVENT.Exit;
             } else if(!CanSeePlayer())
             {
-                nextState = new GranadierPatrol(entity, agent, anim, player, stats);
+                nextState = new GranadierIdle(entity, agent, anim, player, stats);
                 stage = EVENT.Exit;
             }
 

@@ -15,6 +15,7 @@ public class GranadierRangeAttack : State
     {
         
         agent.isStopped = true;
+        //anim.SetTrigger("TurnTrigger");
         base.Enter();
     }
 
@@ -26,11 +27,12 @@ public class GranadierRangeAttack : State
         direction.y = 0.0f;
 
         entity.transform.rotation = Quaternion.Slerp(entity.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * stats.rotationSpeed);
-        //Fare turn con animatore
+        
+        //anim.SetFloat("Angle", angle);
 
         if(angle < 5f)
         {
-            //shoot event
+            anim.SetTrigger("RangeAttack");
         }
         if (Die())
         {

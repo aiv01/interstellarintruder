@@ -77,7 +77,7 @@ public class Door : MonoBehaviour
     public void OpenCloseDoor(bool status)
     {
         doorOpen = status;
-        Animator.SetBool("open", status);
+        Animator.SetBool("open", doorOpen);
     }
     private void OnEnable()
     {
