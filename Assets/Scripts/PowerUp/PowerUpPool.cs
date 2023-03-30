@@ -13,7 +13,7 @@ namespace PowerUp
 
         #region Private Variable
         private int poolSize = 4;
-        private List<PowerUp> powerUps = new List<PowerUp>();
+        public List<PowerUp> powerUps = new List<PowerUp>();
         #endregion
 
         void Awake()
@@ -31,8 +31,8 @@ namespace PowerUp
         private PowerUp CreateInstance(PowerUp powerUpPrefabs)
         {
             PowerUp instance = Instantiate<PowerUp>(powerUpPrefabs);
-            instance.transform.position = new Vector3(Random.Range(0, 10), .5f, Random.Range(0, 10));
-            instance.gameObject.SetActive(true);
+            instance.transform.position = Vector3.zero;
+            instance.gameObject.SetActive(false);
             instance.transform.SetParent(transform);
             instance.OnDespawn += HandlePowerUpDespawn;
             powerUps.Add(instance);

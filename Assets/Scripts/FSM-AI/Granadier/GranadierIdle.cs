@@ -12,6 +12,7 @@ public class GranadierIdle : State
 
     public override void Enter()
     {
+        anim.SetBool("InPursuit",false);
         base.Enter();
     }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,8 +9,13 @@ using UnityEngine;
 public class IsaacGeneratorSO : MonoBehaviour{
         [SerializeField]    
         private string folderPath = "";
-        
-        public Transform tr;
+        [SerializeField]
+        private string endTilePath = "";
+        [SerializeField]
+        private string itemTilePath = "";
+        [SerializeField]
+        private string baseTilePath = "";
+    public Transform tr;
         [SerializeField]
         private Vector2 offset;
         private IsaacTileInfo[,] tileInfo;
@@ -30,6 +36,7 @@ public class IsaacGeneratorSO : MonoBehaviour{
     }
     private void Start()
     {
+        level = GameObject.Find("GameMgr").GetComponent<GameManager>().level;
         GenerateMap();
     }
     public void Generate(Transform container, int width, int height)
@@ -93,7 +100,7 @@ public class IsaacGeneratorSO : MonoBehaviour{
                     if (tiles[col, row] != null)
                     {
                         var go = Instantiate(tiles[col, row].info, container);
-                        //go.gameObject.SetActive(false);
+                        go.gameObject.SetActive(false);
                         go.name = "Tile " + col + ", " + row;
                         go.transform.localPosition = new Vector3(col * offset.x, 0, row * offset.y);
                         tileInfo[col,row] = go;
@@ -102,7 +109,9 @@ public class IsaacGeneratorSO : MonoBehaviour{
             }
         }
         public void BuildMap(Transform container, int width, int height)
-    {
+        {
+
+        List<IsaacTile> specialRooms = new List<IsaacTile>();
         for (int y = 0; y < width; y++)
         {
             for (int x = 0; x < height; x++)
@@ -111,17 +120,29 @@ public class IsaacGeneratorSO : MonoBehaviour{
                 if (tiles[y, x] != null)
                 {
 
-                    //var path = folderPath + " " + tiles[y, x].doors;
-                    var path = folderPath;
+                    var path = folderPath + baseTilePath + " " + tiles[y, x].doors;
                     var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
-                    var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
+                    var index = UnityEngine.Random.Range(0, tilePrefabs.Length);
+                    var tilePrefab = tilePrefabs[index];
+                    tilePrefab.id = baseTilePath + " " + tiles[y, x].doors + baseTilePath + " " + tiles[y, x].doors /*+ " - " + index*/;
                     tiles[y, x].info = tilePrefab;
+                    if (tiles[y,x].doors == 1 || tiles[y,x].doors == 2 || tiles[y,x].doors==4 || tiles[y,x].doors == 8)
+                        specialRooms.Add(tiles[y, x]);
                 }
-
-
             }
-
         }
+        BuildSpecialRooms(specialRooms, itemTilePath);
+        BuildSpecialRooms(specialRooms, endTilePath);
+    }
+    private void BuildSpecialRooms(List<IsaacTile> specialRooms, string specialPath)
+    {
+        int index = UnityEngine.Random.Range(0, specialRooms.Count);
+        var path = folderPath + specialPath + " " + specialRooms[index].doors;
+        var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
+        var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
+        tilePrefab.id = specialPath + " " + specialRooms[index].doors + baseTilePath + " " + specialRooms[index].doors/*+ " - " + index*/;
+        specialRooms[index].info = tilePrefab;
+        specialRooms.RemoveAt(index);
     }
     public void DestroyMap()
     {
@@ -135,10 +156,9 @@ public class IsaacGeneratorSO : MonoBehaviour{
             IsaacTile tile = new IsaacTile();
            
             tile.doors = info.doors;
-            //var path = folderPath + " " + tiles[y, x].doors + info.tileId;;
-            var path = folderPath;
-            var tilePrefab = Resources.LoadAll<IsaacTileInfo>(path);
-            tile.info = tilePrefab[0];
+            var path = folderPath + info.tileId;
+            var tilePrefab = Resources.Load<IsaacTileInfo>(path);
+            tile.info = tilePrefab;
             tiles[info.pos.x, info.pos.y] = tile;
         }
         DrawMap(container, data.dimensions.x, data.dimensions.y);

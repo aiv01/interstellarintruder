@@ -9,8 +9,10 @@ public class IsaacTileInfo : MonoBehaviour
 {
     public string id = "";
     public bool visited = false;
-    [SerializeField, DoNotSerialize] private List<Spawner> Spawners;
-    [SerializeField, DoNotSerialize] public List<Door> Doors;
+    [SerializeField] private List<Spawner> Spawners;
+    [SerializeField] public List<Door> Doors;
+    public int enemyCounter = 0;
+    public bool interactable = true;
     public void SpawnAll()
     {
         if (!visited)
