@@ -1,43 +1,81 @@
+using Attack;
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Weapom;
+using Weapon;
 
 public class PlayerMgr : MonoBehaviour
 {
     #region SerializeField 
     [SerializeField]
-    private GameObject _gun;
-    [SerializeField]
-    private GameObject _staff;
-    [SerializeField]
-    private CinemachineVirtualCamera _3rdCamera;
-    [SerializeField]
-    private CinemachineVirtualCamera _topDownCamera;
+    private CinemachineVirtualCamera _camera;
     #endregion
 
     #region Private Variable
     private PlayerInput _playerInput;
+    private PlayerAttack _characterAttack;
     private Gun _gunComponent;
+    private Staff _staffComponent;
+
+    private bool canShoot = true;
     #endregion
+
+    #region Property
+    private bool isMeleeAttack = true;
+    public bool IsMelee
+    {
+        get => isMeleeAttack;
+    }
+
+    private bool _is3rdPerson = true;
+    public bool Is3rdPerson
+    {
+        get => _is3rdPerson;
+    }
+    #endregion
+
+    private void Start()
+    {
+        _characterAttack = GetComponentInChildren<PlayerAttack>();
+        _gunComponent = GetComponentInChildren<Gun>();
+        _staffComponent = GetComponentInChildren<Staff>();
+    }
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
-        _gunComponent = _gun.GetComponent<Gun>();
     }
 
     void Update()
     {
+        #region Change Weapon
         if (_playerInput.Input.ChangeWeapon.triggered)
-            _gun.SetActive(!_gun.activeSelf);
+        {
+            isMeleeAttack = !isMeleeAttack;
+            _staffComponent.gameObject.SetActive(isMeleeAttack);
+        }
+        #endregion
 
-        if (_playerInput.Input.Attack.triggered && _gun.activeSelf)
-            _gunComponent.Shoot();
+        #region Attack
+        if (_playerInput.Input.Attack.triggered)
+        {
+            if (isMeleeAttack)
+                _characterAttack.MeleeAnimation();
+            else
+            {
+                canShoot = _gunComponent.CountAmmo();
+                if (canShoot)
+                    _characterAttack.RangedAnimation();
+            }
+        }
+        #endregion
 
-        if (_playerInput.Input.ChangeCamera.triggered)
-            _topDownCamera.Priority *= -1;
+        #region Change Camera
+        if(_playerInput.Input.ChangeCamera.triggered)
+        {
+            _is3rdPerson = !_is3rdPerson;
+            _camera.Priority *= -1;
+        }
+        #endregion
     }
 
     #region Enable Disable

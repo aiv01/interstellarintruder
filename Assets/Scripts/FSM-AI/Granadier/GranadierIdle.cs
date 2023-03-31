@@ -18,7 +18,6 @@ public class GranadierIdle : State
 
     public override void Update()
     {
-        Debug.Log("Idle");
         if (Die())
         {
             nextState = new GranadierDie(entity, agent, anim, player, stats);

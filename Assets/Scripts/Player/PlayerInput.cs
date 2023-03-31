@@ -46,15 +46,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""e9f8912a-622d-48f7-bbac-ee24c2455a5e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""498897fd-d9fc-438e-b605-f8391c352f6c"",
@@ -107,6 +98,33 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation_TopDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""e9f8912a-622d-48f7-bbac-ee24c2455a5e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rotation_3rdPerson"",
+                    ""type"": ""Value"",
+                    ""id"": ""6f20e580-3278-4f51-a2e8-ef747ba3fc49"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotationGamePad"",
+                    ""type"": ""Value"",
+                    ""id"": ""3477fa7b-b80d-45d4-bc77-d8cedefc18b0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -195,17 +213,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""035c7b08-94bd-4735-85f4-64de7d5ba637"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -340,6 +347,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Esc"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8e22ea2-8294-4079-97a1-37849db1e562"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation_3rdPerson"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e257196f-9a68-451c-a53a-c7983425552e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation_TopDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0235e17-3cc3-42d7-84dc-e49ec3c62e1e"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotationGamePad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -350,13 +390,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Input = asset.FindActionMap("Input", throwIfNotFound: true);
         m_Input_Move = m_Input.FindAction("Move", throwIfNotFound: true);
         m_Input_Run = m_Input.FindAction("Run", throwIfNotFound: true);
-        m_Input_MousePosition = m_Input.FindAction("MousePosition", throwIfNotFound: true);
         m_Input_Attack = m_Input.FindAction("Attack", throwIfNotFound: true);
         m_Input_ChangeWeapon = m_Input.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Input_ChangeCamera = m_Input.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Input_ActiveSkill = m_Input.FindAction("ActiveSkill", throwIfNotFound: true);
         m_Input_Interaction = m_Input.FindAction("Interaction", throwIfNotFound: true);
         m_Input_Esc = m_Input.FindAction("Esc", throwIfNotFound: true);
+        m_Input_Rotation_TopDown = m_Input.FindAction("Rotation_TopDown", throwIfNotFound: true);
+        m_Input_Rotation_3rdPerson = m_Input.FindAction("Rotation_3rdPerson", throwIfNotFound: true);
+        m_Input_RotationGamePad = m_Input.FindAction("RotationGamePad", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -418,26 +460,30 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IInputActions m_InputActionsCallbackInterface;
     private readonly InputAction m_Input_Move;
     private readonly InputAction m_Input_Run;
-    private readonly InputAction m_Input_MousePosition;
     private readonly InputAction m_Input_Attack;
     private readonly InputAction m_Input_ChangeWeapon;
     private readonly InputAction m_Input_ChangeCamera;
     private readonly InputAction m_Input_ActiveSkill;
     private readonly InputAction m_Input_Interaction;
     private readonly InputAction m_Input_Esc;
+    private readonly InputAction m_Input_Rotation_TopDown;
+    private readonly InputAction m_Input_Rotation_3rdPerson;
+    private readonly InputAction m_Input_RotationGamePad;
     public struct InputActions
     {
         private @PlayerInput m_Wrapper;
         public InputActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Input_Move;
         public InputAction @Run => m_Wrapper.m_Input_Run;
-        public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
         public InputAction @Attack => m_Wrapper.m_Input_Attack;
         public InputAction @ChangeWeapon => m_Wrapper.m_Input_ChangeWeapon;
         public InputAction @ChangeCamera => m_Wrapper.m_Input_ChangeCamera;
         public InputAction @ActiveSkill => m_Wrapper.m_Input_ActiveSkill;
         public InputAction @Interaction => m_Wrapper.m_Input_Interaction;
         public InputAction @Esc => m_Wrapper.m_Input_Esc;
+        public InputAction @Rotation_TopDown => m_Wrapper.m_Input_Rotation_TopDown;
+        public InputAction @Rotation_3rdPerson => m_Wrapper.m_Input_Rotation_3rdPerson;
+        public InputAction @RotationGamePad => m_Wrapper.m_Input_RotationGamePad;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -453,9 +499,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Run.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRun;
-                @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @Attack.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAttack;
@@ -474,6 +517,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Esc.started -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
                 @Esc.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
                 @Esc.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnEsc;
+                @Rotation_TopDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_TopDown;
+                @Rotation_TopDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_TopDown;
+                @Rotation_TopDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_TopDown;
+                @Rotation_3rdPerson.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_3rdPerson;
+                @Rotation_3rdPerson.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_3rdPerson;
+                @Rotation_3rdPerson.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotation_3rdPerson;
+                @RotationGamePad.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotationGamePad;
+                @RotationGamePad.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotationGamePad;
+                @RotationGamePad.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotationGamePad;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -484,9 +536,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -505,6 +554,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Esc.started += instance.OnEsc;
                 @Esc.performed += instance.OnEsc;
                 @Esc.canceled += instance.OnEsc;
+                @Rotation_TopDown.started += instance.OnRotation_TopDown;
+                @Rotation_TopDown.performed += instance.OnRotation_TopDown;
+                @Rotation_TopDown.canceled += instance.OnRotation_TopDown;
+                @Rotation_3rdPerson.started += instance.OnRotation_3rdPerson;
+                @Rotation_3rdPerson.performed += instance.OnRotation_3rdPerson;
+                @Rotation_3rdPerson.canceled += instance.OnRotation_3rdPerson;
+                @RotationGamePad.started += instance.OnRotationGamePad;
+                @RotationGamePad.performed += instance.OnRotationGamePad;
+                @RotationGamePad.canceled += instance.OnRotationGamePad;
             }
         }
     }
@@ -513,12 +571,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnChangeCamera(InputAction.CallbackContext context);
         void OnActiveSkill(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnEsc(InputAction.CallbackContext context);
+        void OnRotation_TopDown(InputAction.CallbackContext context);
+        void OnRotation_3rdPerson(InputAction.CallbackContext context);
+        void OnRotationGamePad(InputAction.CallbackContext context);
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
-using Weapom.Projectile;
+using UnityEngine.UI;
+using Weapon.Projectile;
 
 namespace PowerUp
 {
@@ -12,7 +13,6 @@ namespace PowerUp
         public event PowerUpDelegate OnDespawn = null;
         #endregion
 
-        [SerializeField]
         private PlayerStats _playerStats;
 
         private void Awake()
@@ -28,12 +28,12 @@ namespace PowerUp
         #region Protected Event
         protected void HP_Up(float amount)
         {
-            _playerStats.HP += amount;
+            _playerStats.Health += amount;
         }
 
         protected void AttackUp_Stat(float amount)
         {
-            _playerStats.Attack += amount;
+            _playerStats.Damage += amount;
         }
 
         protected void SpeedMovementUp_Stat(float amount)

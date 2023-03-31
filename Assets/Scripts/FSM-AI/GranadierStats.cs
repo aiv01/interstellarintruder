@@ -13,4 +13,5 @@ public class GranadierStats : ScriptableObject
     public float chaseSpeed;
     public float rotationSpeed = 2.0f;
     public float healthPoint = 10f;
+    public float attackDamage = 5.0f;
 }

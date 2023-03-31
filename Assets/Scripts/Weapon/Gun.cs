@@ -1,50 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Weapom.Projectile;
+using Weapon.Projectile;
 
-namespace Weapom
+namespace Weapon
 {
     public class Gun : MonoBehaviour
     {
         #region SerializeField 
         [SerializeField]
-        private GameObject _player;
+        private Transform _handPlayer;
         [SerializeField]
-        private Transform targetPosition;
-        [SerializeField]
-        private BulletPool bulletPool = null;
-        [SerializeField]
-        private Vector3 mouthOfFire = Vector3.zero;
+        private Transform _gunHoldPosition;
         #endregion
 
         #region Private Variable
-        private float shootCoolDown = 0.2f;
-        private float lastFire = -10.0f;
+        private PlayerMgr _playerMgr;
+        private Shooting _shooting;
+
+        private float reloadTime = 5.0f;
+        private float counterReload = 0;
+        private int ammo = 7;
+        private int counterAmmo;
         #endregion
+
+        private void Start()
+        {
+            _playerMgr = GetComponentInParent<PlayerMgr>();
+        }
+
+        private void Awake()
+        {
+            counterAmmo = ammo;
+            _shooting = GetComponent<Shooting>();
+        }
 
         void Update()
         {
-            GunForward();
+            if (!_playerMgr.IsMelee)
+                GunShootPosition();
+            else
+                GunHoldPosition();
+
+            if(counterAmmo < 0)
+            {
+                counterReload += Time.deltaTime;
+                if (counterReload > reloadTime)
+                {
+                    counterAmmo = ammo;
+                    counterReload = 0;
+                }
+            }
         }
 
         #region Private Method
-        private void GunForward()
+        private void GunShootPosition()
         {
-            transform.position = targetPosition.position;
-            transform.right = _player.transform.forward;
+            transform.position = _handPlayer.transform.position;
+            transform.right = _handPlayer.transform.right;
         }
 
-        public void Shoot()
+        private void GunHoldPosition()
         {
-            if (Time.time < lastFire + shootCoolDown)
-                return;
-            lastFire = Time.time;
-
-            Bullet instance = bulletPool.GetBullet();
-            instance.transform.position = transform.TransformPoint(mouthOfFire);
-            instance.transform.rotation = _player.transform.rotation;
+            transform.position = _gunHoldPosition.position;
+            transform.rotation = _gunHoldPosition.rotation;
         }
         #endregion
+
+        public bool CountAmmo()
+        {
+            counterAmmo--;
+            if (counterAmmo >= 0)
+                _shooting.ShootPlayer();
+            
+            return counterAmmo >= 0;
+        }
     }
 }

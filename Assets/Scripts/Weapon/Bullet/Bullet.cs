@@ -1,49 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
+using Stats.Health;
 using UnityEngine;
-using UnityEngine.Windows;
 
-namespace Weapom.Projectile
+namespace Weapon.Projectile
 {
     public class Bullet : MonoBehaviour
     {
         public delegate void BulletDelegate(Bullet bulletDeath);
         public event BulletDelegate OnDeath = null;
 
-        #region Private variables
-        private float moveSpeed = 1.0f;
-        private float lifetime = 5.0f;
-        private float age = 0.0f;
+        #region Protected variables
+        protected float bulletSpeed = 1.0f;
+        protected float lifetime = 5.0f;
+        protected float timer = 0.0f;
         private float bulletDamage = 2.0f;
         #endregion
 
         void OnDisable()
         {
-            age = 0.0f;
+            timer = 0.0f;
         }
+
         void Update()
         {
-            age += Time.deltaTime;
-            if (age >= lifetime)
+            timer += Time.deltaTime;
+            if (timer >= lifetime)
                 Die();
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            transform.position += transform.forward * bulletSpeed * Time.deltaTime;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if(other.gameObject.tag == "Enemy")
             {
                 Die();
-                other.gameObject.GetComponent<PlayerStats>().HP -= bulletDamage;
-            }
-            if (other.gameObject.tag == "Enemy")
-            {
-                Die();
-                other.gameObject.GetComponent<GranadierStats>().healthPoint -= bulletDamage;
+                var enemy = other.gameObject.GetComponent<EnemyAI>();
+                enemy.stats.healthPoint -= ((bulletDamage * enemy.stats.attackDamage / 100) + bulletDamage);
             }
         }
 
-        private void Die()
+        protected void Die()
         {
             OnDeath?.Invoke(this);
         }

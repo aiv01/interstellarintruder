@@ -48,14 +48,14 @@ public class Save : MonoBehaviour
     }
     public void SavePlayer(Vector2Int pos)
     {
-        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement, pos);
+        PlayerInfo info = new PlayerInfo(stats.Health, stats.Damage, stats.SpeedAttack, stats.SpeedMovement, pos);
         FileHandler.SaveToJSON(info, playerSav);
     }
     public void LoadPlayer()
     {
         PlayerInfo info = FileHandler.ReadFromJSON<PlayerInfo>(playerSav);
-        stats.HP = info.hp;
-        stats.Attack = info.attackDamage;
+        stats.Health = info.hp;
+        stats.Damage = info.attackDamage;
         stats.SpeedAttack = info.attackSpeed;
         stats.SpeedMovement = info.speedMovement;
         roomManager.Load(info.currentRoom);

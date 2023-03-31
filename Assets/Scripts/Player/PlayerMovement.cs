@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Attack;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,11 +8,17 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private Animator _animator;
 
+    private PlayerStats _stats;
+    private PlayerMgr _playerMgr;
+
+    private PlayerAttack _attack;
+    private PlayerMovement _movement;
+    private PlayerRotation _rotation;
+
     private Vector3 inputVector;
+    private Vector2 mousePos;
     private float walkSpeed = 1.0f;
     private float runSpeed = 6.0f;
-    private float horizontalSpeedMouse = 2.0f;
-    private bool is3rdPerson = true;
     #endregion
 
     private void Awake()
@@ -21,50 +26,56 @@ public class PlayerMovement : MonoBehaviour
         _playerInput = new PlayerInput();
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+
+        _stats = GetComponent<PlayerStats>();
+        _playerMgr = GetComponentInParent<PlayerMgr>();
+
+        _attack = GetComponent<PlayerAttack>();
+        _movement = GetComponent<PlayerMovement>();
+        _rotation = GetComponent<PlayerRotation>();
     }
 
     void Update()
     {
         Move();
-        if (_playerInput.Input.ChangeCamera.triggered)
-            is3rdPerson = !is3rdPerson;
 
-        if (is3rdPerson)
-            PlayerRotation_3rdPerson();
-        else
-            PlayerRotation_TopDown();
+        _animator.SetBool("isRanged", !_playerMgr.IsMelee);
     }
-
-    #region Rotation
-    private void PlayerRotation_TopDown()
-    {
-        var mouse = _playerInput.Input.MousePosition.ReadValue<Vector2>();
-        var screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
-        var offset = new Vector2(mouse.x - screenPoint.x, mouse.y - screenPoint.y);
-        var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, -angle + 90, 0);
-    }
-
-    private void PlayerRotation_3rdPerson()
-    {
-        transform.Rotate(new Vector3(0, horizontalSpeedMouse * Input.GetAxis("Mouse X")));
-    }
-    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bulelt")
+        if (other.gameObject.tag == "Bullet")
         {
-            if (other.transform.position.x < transform.position.x)
-                _animator.SetFloat("HurtFromX", -1);
-            else if (other.transform.position.x > transform.position.x)
-                _animator.SetFloat("HurtFromX", 1);
-
-            if (other.transform.position.y < transform.position.y)
-                _animator.SetFloat("HurtFromY", -1);
-            else if (other.transform.position.y > transform.position.y)
-                _animator.SetFloat("HurtFromY", 1);
+            if (other.gameObject.tag == "Enemy")
+                _stats.Health -= other.gameObject.GetComponent<EnemyAI>().stats.attackDamage;
+            HurtDirection(other.transform);
+            _animator.SetTrigger("Hurt");
         }
+        if (_stats.Health <= 0)
+            Die();
+    }
+
+    private void HurtDirection(Transform other)
+    {
+        if (other.position.x < transform.position.x)
+            _animator.SetFloat("HurtFromX", -1);
+        else if (other.position.x > transform.position.x)
+            _animator.SetFloat("HurtFromX", 1);
+
+        if (other.position.z < transform.position.z)
+            _animator.SetFloat("HurtFromY", -1);
+        else if (other.position.z > transform.position.z)
+            _animator.SetFloat("HurtFromY", 1);
+    }
+
+    private void Die()
+    {
+        _animator.SetTrigger("Death");
+        _controller.height = .5f;
+        _stats.Health = 0;
+        _attack.enabled = false;
+        _movement.enabled = false;
+        _rotation.enabled = false;
     }
 
     #region Enable Disable

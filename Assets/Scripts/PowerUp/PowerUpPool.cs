@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Weapom.Projectile;
+using Weapon.Projectile;
 
 namespace PowerUp
 {

@@ -16,7 +16,6 @@ public class GranadierPatrol : State
 
     public override void Enter()
     {
-        Debug.Log("Enter Patrol");
         anim.SetBool("InPursuit", true);
         float lastDistance = Mathf.Infinity;
         waypoints = entity.GetComponent<EnemyAI>().waypoints;
@@ -66,7 +65,6 @@ public class GranadierPatrol : State
     }
     public override void Exit()
     {
-        Debug.Log("Exit Patrol");
         anim.SetBool("InPursuit", false);
         base.Exit();
     }

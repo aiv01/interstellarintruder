@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Weapom.Projectile
+namespace Weapon.Projectile
 {
     public class BulletPool : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Weapom.Projectile
         #endregion
 
         #region Private Variable
-        private int poolSize = 7;
+        private int poolSize = 50;
         private List<Bullet> pool = new List<Bullet>();
         #endregion
 
@@ -23,18 +23,17 @@ namespace Weapom.Projectile
 
         public Bullet GetBullet()
         {
-            Bullet retval = null;
+            Bullet val = null;
             foreach (Bullet projectile in pool)
                 if (!projectile.gameObject.activeSelf)
                 {
-                    retval = projectile;
+                    val = projectile;
                     break;
                 }
-            if (retval == null)
-                retval = CreateInstance();
-            retval.gameObject.SetActive(true);
-            retval.transform.SetParent(null);
-            return retval;
+            if (val == null)
+                val = CreateInstance();
+            val.gameObject.SetActive(true);
+            return val;
         }
 
         private void FillPool()
