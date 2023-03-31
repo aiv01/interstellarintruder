@@ -31,9 +31,6 @@ namespace Weapon
 
         public void ShootEnemy()
         {
-            //var canShoot = CanShoot();
-            //if (!canShoot)
-            //    return;
             if (Time.time < lastFire + 2.5f)
                 return;
             lastFire = Time.time;

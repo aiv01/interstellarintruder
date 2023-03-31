@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerRotation _rotation;
 
     private Vector3 inputVector;
-    private Vector2 mousePos;
     private float walkSpeed = 1.0f;
     private float runSpeed = 6.0f;
     #endregion

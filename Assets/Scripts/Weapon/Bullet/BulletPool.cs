@@ -9,10 +9,11 @@ namespace Weapon.Projectile
         #region SerializeField
         [SerializeField]
         private Bullet bulletPrefab = null;
+        [SerializeField]
+        private int poolSize = 20;
         #endregion
 
         #region Private Variable
-        private int poolSize = 50;
         private List<Bullet> pool = new List<Bullet>();
         #endregion
 
@@ -30,8 +31,6 @@ namespace Weapon.Projectile
                     val = projectile;
                     break;
                 }
-            if (val == null)
-                val = CreateInstance();
             val.gameObject.SetActive(true);
             return val;
         }

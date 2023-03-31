@@ -17,7 +17,7 @@ namespace Weapon.Projectile
             timer += Time.deltaTime;
             if (timer >= lifetime)
                 Die();
-            transform.LookAt(transform);
+            transform.position += transform.forward * bulletSpeed * Time.deltaTime;
         }
 
         private void OnTriggerEnter(Collider other)
