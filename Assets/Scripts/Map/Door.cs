@@ -46,10 +46,10 @@ public class Door : MonoBehaviour
         switch (doorDirection)
         {
             case isaacDoorDirection.North:
-                return transform.position + Vector3.down;
+                return transform.position + Vector3.back;
                 ;
             case isaacDoorDirection.South:
-                return transform.position + Vector3.up;
+                return transform.position + Vector3.forward;
                 ;
             case isaacDoorDirection.East:
                 return transform.position + Vector3.left;

@@ -27,6 +27,16 @@ public class RoomManager : MonoBehaviour
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }
+    public void Load(Vector2Int pos)
+    {
+        isaacTileInfos = GetComponent<IsaacGeneratorSO>().TileInfo;
+        tilePos = new Vector2Int(isaacTileInfos.GetLength(0) / 2, isaacTileInfos.GetLength(1) / 2);
+        currentTile = isaacTileInfos[pos.x,pos.y];
+        currentTile.gameObject.SetActive(true);
+        player.position = currentTile.transform.position;
+        currentTile.SpawnAll();
+        ActivateDoors(currentTile.visited);
+    }
     public void DoorWarp (isaacDoorDirection doorDirection)
     {
         switch (doorDirection)

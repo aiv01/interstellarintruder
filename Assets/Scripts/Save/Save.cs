@@ -8,6 +8,7 @@ public class Save : MonoBehaviour
 {
     public IsaacGeneratorSO gen;
     public PlayerStats stats;
+    public RoomManager roomManager;
     private string file = "map.sav";
     private string playerSav = "player.sav";
     public bool save;
@@ -57,11 +58,12 @@ public class Save : MonoBehaviour
         stats.Attack = info.attackDamage;
         stats.SpeedAttack = info.attackSpeed;
         stats.SpeedMovement = info.speedMovement;
+        roomManager.Load(info.currentRoom);
     }
     public void LoadGen()
     {
         TileMapData data = FileHandler.ReadFromJSON<TileMapData>(file);
-        //gamemanager.level = data.level;
+        GameObject.Find("GameMgr").GetComponent<GameManager>().level = data.level;
         gen.LoadMap(gen.tr, data);
     }
 
