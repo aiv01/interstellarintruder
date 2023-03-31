@@ -23,6 +23,7 @@ public class RoomManager : MonoBehaviour
         tilePos = new Vector2Int(isaacTileInfos.GetLength(0)/2, isaacTileInfos.GetLength(1)/2);
         currentTile = isaacTileInfos[tilePos.x, tilePos.y];
         currentTile.gameObject.SetActive(true);
+        player.position = currentTile.transform.position;
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }
