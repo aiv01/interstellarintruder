@@ -1,8 +1,12 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[Serializable]
+public class WarpPlayer : UnityEvent<Vector3>  { }
 public class RoomManager : MonoBehaviour
 {
     public IsaacTileInfo[,] isaacTileInfos;
@@ -13,6 +17,7 @@ public class RoomManager : MonoBehaviour
     private IsaacTileInfo nextTile;
     private float secondToWait = 0.5f;
     private float secondPassed = 0.0f;
+    public WarpPlayer myWarp;
     private void Start()
     {
         Init();
@@ -33,7 +38,7 @@ public class RoomManager : MonoBehaviour
         tilePos = new Vector2Int(isaacTileInfos.GetLength(0) / 2, isaacTileInfos.GetLength(1) / 2);
         currentTile = isaacTileInfos[pos.x,pos.y];
         currentTile.gameObject.SetActive(true);
-        player.position = currentTile.transform.position;
+        myWarp.Invoke(currentTile.transform.position);
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }
@@ -62,20 +67,20 @@ public class RoomManager : MonoBehaviour
             switch (doorDirection)
             {
                 case isaacDoorDirection.North:
-                    if(door.doorDirection == isaacDoorDirection.South)
-                        player.transform.position = door.SpawnPlayer();
+                    if (door.doorDirection == isaacDoorDirection.South)
+                        myWarp.Invoke(door.SpawnPlayer());
                     break;
                 case isaacDoorDirection.South:
                     if(door.doorDirection == isaacDoorDirection.North)
-                        player.transform.position = door.SpawnPlayer();
+                        myWarp.Invoke(door.SpawnPlayer());
                     break;
                 case isaacDoorDirection.East:
                     if(door.doorDirection == isaacDoorDirection.West)
-                        player.transform.position = door.SpawnPlayer();
+                        myWarp.Invoke(door.SpawnPlayer());
                     break;
                 case isaacDoorDirection.West:
                     if(door.doorDirection == isaacDoorDirection.East)
-                        player.transform.position = door.SpawnPlayer();
+                        myWarp.Invoke(door.SpawnPlayer());
                     break;
             }
         }

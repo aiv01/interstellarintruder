@@ -41,7 +41,12 @@ public class PlayerMovement : MonoBehaviour
 
         _animator.SetBool("isRanged", !_playerMgr.IsMelee);
     }
-
+    public void WarpPlayer(Vector3 pos)
+    {
+        _controller.enabled = false;
+        _controller.transform.position = pos;
+        _controller.enabled = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
