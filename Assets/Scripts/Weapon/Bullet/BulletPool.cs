@@ -12,7 +12,7 @@ namespace Weapon.Projectile
         #endregion
 
         #region Private Variable
-        private int poolSize = 7;
+        private int poolSize = 50;
         private List<Bullet> pool = new List<Bullet>();
         #endregion
 

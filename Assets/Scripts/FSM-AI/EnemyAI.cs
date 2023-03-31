@@ -18,8 +18,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentState = new GranadierIdle(gameObject, agent, anim, player,stats);
-        
-
     }
 
     private void Update()

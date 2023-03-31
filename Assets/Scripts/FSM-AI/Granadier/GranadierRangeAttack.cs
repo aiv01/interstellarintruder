@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Pipes;
 using UnityEngine;
 using UnityEngine.AI;
+using Weapon;
 
 public class GranadierRangeAttack : State
 {
+    Shooting _shooting;
     public GranadierRangeAttack(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats) : base(_entity, _agent, _anim, _player, _stats)
     {
         stateType = STATE.RangeAttack;
@@ -15,13 +14,13 @@ public class GranadierRangeAttack : State
     {
         
         agent.isStopped = true;
+        _shooting = entity.gameObject.GetComponentInChildren<Shooting>();
         //anim.SetTrigger("TurnTrigger");
         base.Enter();
     }
 
     public override void Update()
     {
-        Debug.Log("Range");
         Vector3 direction = player.position - entity.transform.position;
         float angle = Vector3.Angle(direction, entity.transform.forward);
         direction.y = 0.0f;
@@ -33,6 +32,7 @@ public class GranadierRangeAttack : State
         if(angle < 5f)
         {
             anim.SetTrigger("RangeAttack");
+            _shooting.ShootEnemy();
         }
         if (Die())
         {

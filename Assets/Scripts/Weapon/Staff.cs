@@ -30,8 +30,8 @@ namespace Weapon
         {
             if (other.gameObject.tag == "Enemy")
             {
-                var stats = other.gameObject.GetComponent<StatsModule>();
-                stats.Health -= ((damage * stats.Damage / 100) + damage);
+                var enemy = other.gameObject.GetComponent<EnemyAI>();
+                enemy.stats.healthPoint-= ((damage * enemy.stats.attackDamage / 100) + damage);
             }
         }
     }

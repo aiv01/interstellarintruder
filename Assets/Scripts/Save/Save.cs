@@ -47,7 +47,7 @@ public class Save : MonoBehaviour
     }
     public void SavePlayer(Vector2Int pos)
     {
-        PlayerInfo info = new PlayerInfo(stats.HP, stats.Attack, stats.SpeedAttack, stats.SpeedMovement, pos);
+        PlayerInfo info = new PlayerInfo(stats.Health, stats.Damage, stats.SpeedAttack, stats.SpeedMovement, pos);
         FileHandler.SaveToJSON(info, playerSav);
     }
     public void LoadPlayer()

@@ -7,16 +7,14 @@ public class PlayerMgr : MonoBehaviour
 {
     #region SerializeField 
     [SerializeField]
-    private Gun _gunComponent;
-    [SerializeField]
-    private Staff _staff;
-    [SerializeField]
     private CinemachineVirtualCamera _camera;
     #endregion
 
     #region Private Variable
     private PlayerInput _playerInput;
     private PlayerAttack _characterAttack;
+    private Gun _gunComponent;
+    private Staff _staffComponent;
 
     private bool canShoot = true;
     #endregion
@@ -38,6 +36,8 @@ public class PlayerMgr : MonoBehaviour
     private void Start()
     {
         _characterAttack = GetComponentInChildren<PlayerAttack>();
+        _gunComponent = GetComponentInChildren<Gun>();
+        _staffComponent = GetComponentInChildren<Staff>();
     }
 
     private void Awake()
@@ -51,7 +51,7 @@ public class PlayerMgr : MonoBehaviour
         if (_playerInput.Input.ChangeWeapon.triggered)
         {
             isMeleeAttack = !isMeleeAttack;
-            _staff.gameObject.SetActive(isMeleeAttack);
+            _staffComponent.gameObject.SetActive(isMeleeAttack);
         }
         #endregion
 

@@ -46,19 +46,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Bullet")
         {
-            if (other.transform.position.x < transform.position.x)
-                _animator.SetFloat("HurtFromX", -1);
-            else if (other.transform.position.x > transform.position.x)
-                _animator.SetFloat("HurtFromX", 1);
-
-            if (other.transform.position.y < transform.position.y)
-                _animator.SetFloat("HurtFromY", -1);
-            else if (other.transform.position.y > transform.position.y)
-                _animator.SetFloat("HurtFromY", 1);
+            if (other.gameObject.tag == "Enemy")
+                _stats.Health -= other.gameObject.GetComponent<EnemyAI>().stats.attackDamage;
+            HurtDirection(other.transform);
             _animator.SetTrigger("Hurt");
         }
         if (_stats.Health <= 0)
             Die();
+    }
+
+    private void HurtDirection(Transform other)
+    {
+        if (other.position.x < transform.position.x)
+            _animator.SetFloat("HurtFromX", -1);
+        else if (other.position.x > transform.position.x)
+            _animator.SetFloat("HurtFromX", 1);
+
+        if (other.position.z < transform.position.z)
+            _animator.SetFloat("HurtFromY", -1);
+        else if (other.position.z > transform.position.z)
+            _animator.SetFloat("HurtFromY", 1);
     }
 
     private void Die()

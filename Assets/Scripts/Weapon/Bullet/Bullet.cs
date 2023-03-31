@@ -8,37 +8,37 @@ namespace Weapon.Projectile
         public delegate void BulletDelegate(Bullet bulletDeath);
         public event BulletDelegate OnDeath = null;
 
-        #region Private variables
-        private float moveSpeed = 1.0f;
-        private float lifetime = 5.0f;
-        private float age = 0.0f;
+        #region Protected variables
+        protected float bulletSpeed = 1.0f;
+        protected float lifetime = 5.0f;
+        protected float timer = 0.0f;
         private float bulletDamage = 2.0f;
         #endregion
 
         void OnDisable()
         {
-            age = 0.0f;
+            timer = 0.0f;
         }
 
         void Update()
         {
-            age += Time.deltaTime;
-            if (age >= lifetime)
+            timer += Time.deltaTime;
+            if (timer >= lifetime)
                 Die();
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            transform.position += transform.forward * bulletSpeed * Time.deltaTime;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+            if(other.gameObject.tag == "Enemy")
             {
                 Die();
-                var stats = other.gameObject.GetComponent<StatsModule>();
-                stats.Health -= ((bulletDamage * stats.Damage / 100) + bulletDamage);
+                var enemy = other.gameObject.GetComponent<EnemyAI>();
+                enemy.stats.healthPoint -= ((bulletDamage * enemy.stats.attackDamage / 100) + bulletDamage);
             }
         }
 
-        private void Die()
+        protected void Die()
         {
             OnDeath?.Invoke(this);
         }
