@@ -1,6 +1,8 @@
 using Attack;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using Weapon;
 
 public class PlayerMgr : MonoBehaviour
@@ -8,6 +10,8 @@ public class PlayerMgr : MonoBehaviour
     #region SerializeField 
     [SerializeField]
     private CinemachineVirtualCamera _camera;
+    [SerializeField]
+    private UnityEngine.Events.UnityEvent onPauseRequested;
     #endregion
 
     #region Private Variable
@@ -79,16 +83,22 @@ public class PlayerMgr : MonoBehaviour
     }
 
     #region Enable Disable
-
     private void OnEnable()
     {
         _playerInput.Enable();
+        _playerInput.Input.Pause.performed += HandlePauseButtonPressed;
     }
 
     private void OnDisable()
     {
         _playerInput.Disable();
+        _playerInput.Input.Pause.performed -= HandlePauseButtonPressed;
     }
-
     #endregion
+
+    private void HandlePauseButtonPressed(InputAction.CallbackContext obj)
+    {
+        onPauseRequested.Invoke();
+        gameObject.SetActive(false);
+    }
 }
