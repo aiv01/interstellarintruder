@@ -13,7 +13,6 @@ namespace Weapon
         #endregion
 
         #region Private Variable
-        private PlayerMgr _playerMgr;
         private Shooting _shooting;
 
         private float reloadTime = 5.0f;
@@ -21,11 +20,6 @@ namespace Weapon
         private int ammo = 7;
         private int counterAmmo;
         #endregion
-
-        private void Start()
-        {
-            _playerMgr = GetComponentInParent<PlayerMgr>();
-        }
 
         private void Awake()
         {
@@ -35,11 +29,6 @@ namespace Weapon
 
         void Update()
         {
-            if (!_playerMgr.IsMelee)
-                GunShootPosition();
-            else
-                GunHoldPosition();
-
             if(counterAmmo < 0)
             {
                 counterReload += Time.deltaTime;
@@ -52,14 +41,15 @@ namespace Weapon
         }
 
         #region Private Method
-        private void GunShootPosition()
+        public void GunShootPosition()
         {
-            transform.position = _handPlayer.transform.position;
-            transform.right = _handPlayer.transform.right;
+            transform.SetParent(_handPlayer);
+            transform.localPosition = new Vector3(0.15f, 0.033f, -0.042f);
         }
 
-        private void GunHoldPosition()
+        public void GunHoldPosition()
         {
+            transform.SetParent(_gunHoldPosition);
             transform.position = _gunHoldPosition.position;
             transform.rotation = _gunHoldPosition.rotation;
         }

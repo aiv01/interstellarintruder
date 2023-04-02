@@ -7,11 +7,6 @@ namespace Weapon.Projectile
 {
     public class BulletEnemy : Bullet
     {
-        #region Private variables
-        private float bulletDamage = 2.0f;
-        #endregion
-
-
         void Update()
         {
             timer += Time.deltaTime;

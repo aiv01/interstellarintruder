@@ -41,6 +41,7 @@ public class PlayerMgr : MonoBehaviour
     {
         _characterAttack = GetComponentInChildren<PlayerAttack>();
         _gunComponent = GetComponentInChildren<Gun>();
+        _gunComponent.GunHoldPosition();
         _staffComponent = GetComponentInChildren<Staff>();
     }
 
@@ -55,6 +56,10 @@ public class PlayerMgr : MonoBehaviour
         if (_playerInput.Input.ChangeWeapon.triggered)
         {
             isMeleeAttack = !isMeleeAttack;
+            if (isMeleeAttack)
+                _gunComponent.GunHoldPosition();
+            else
+                _gunComponent.GunShootPosition();
             _staffComponent.gameObject.SetActive(isMeleeAttack);
         }
         #endregion
