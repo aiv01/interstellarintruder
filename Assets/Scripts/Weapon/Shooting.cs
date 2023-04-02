@@ -8,6 +8,8 @@ namespace Weapon
         [SerializeField]
         private BulletPool bulletPool = null;
         [SerializeField]
+        private Animator animator;
+        [SerializeField]
         private Vector3 mouthOfFire;
 
         private Camera _camera;
@@ -44,7 +46,7 @@ namespace Weapon
             var canShoot = CanShoot();
             if (!canShoot)
                 return;
-
+            animator.SetTrigger("RangedAttack");
             Bullet instance = bulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
             instance.transform.forward = transform.right;

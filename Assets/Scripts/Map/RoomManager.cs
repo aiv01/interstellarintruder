@@ -89,8 +89,9 @@ public class RoomManager : MonoBehaviour
         currentTile = nextTile;
         
         ActivateDoors(currentTile.visited);
-        saveMgr.SavePlayer(tilePos);
+        
         saveMgr.SaveGen();
+        saveMgr.SavePlayer(tilePos);
     }
 
     public void ActivateDoors(bool status)
