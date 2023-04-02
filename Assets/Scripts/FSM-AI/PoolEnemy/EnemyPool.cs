@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField]
-    private GranadierStats _stats;
-    [SerializeField]
     private Enemy enemyPrefab;
 
     private int poolSize = 10;
@@ -25,9 +23,8 @@ public class EnemyPool : MonoBehaviour
 
     private Enemy CreateInstance()
     {
-        Enemy instance = Instantiate<Enemy>(enemyPrefab);
+        Enemy instance = Instantiate(enemyPrefab);
         //instance.gameObject.SetActive(false);
-        instance.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
         instance.transform.SetParent(transform);
         pool.Add(instance);
         return instance;
@@ -43,7 +40,6 @@ public class EnemyPool : MonoBehaviour
                 break;
             }
         val.gameObject.SetActive(true);
-        val.gameObject.GetComponent<GranadierStats>().healthPoint = 10;
         return val;
     }
 }

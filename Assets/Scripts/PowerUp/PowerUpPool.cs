@@ -8,12 +8,12 @@ namespace PowerUp
     {
         #region SerializeField
         [SerializeField]
-        private List<PowerUp> powerUpPrefabs = new List<PowerUp>();
+        private PowerUpBase[] powerUpPrefabs;
         #endregion
 
         #region Private Variable
         private int poolSize = 4;
-        public List<PowerUp> powerUps = new List<PowerUp>();
+        private List<PowerUpBase> powerUps = new List<PowerUpBase>();
         #endregion
 
         void Awake()
@@ -28,10 +28,9 @@ namespace PowerUp
                 CreateInstance(powerUpPrefabs[i]);
         }
 
-        private PowerUp CreateInstance(PowerUp powerUpPrefabs)
+        private PowerUpBase CreateInstance(PowerUpBase powerUpPrefabs)
         {
-            PowerUp instance = Instantiate<PowerUp>(powerUpPrefabs);
-            instance.transform.position = Vector3.zero;
+            PowerUpBase instance = Instantiate(powerUpPrefabs);
             instance.gameObject.SetActive(false);
             instance.transform.SetParent(transform);
             instance.OnDespawn += HandlePowerUpDespawn;
@@ -39,10 +38,47 @@ namespace PowerUp
             return instance;
         }
 
-        private void HandlePowerUpDespawn(PowerUp powerUpDespawn)
+        private void HandlePowerUpDespawn(PowerUpBase powerUpDespawn)
         {
             powerUpDespawn.gameObject.SetActive(false);
             powerUpDespawn.transform.SetParent(transform);
+        }
+        #endregion
+
+        #region Get
+        public PowerUpBase GetPowerUp()
+        {
+            PowerUpBase val = null;
+            foreach (PowerUpBase powerUp in powerUps)
+                if (!powerUp.gameObject.activeSelf)
+                {
+                    val = powerUp;
+                    break;
+                }
+            val.gameObject.SetActive(true);
+            return val;
+        }
+
+        public PowerUpBase GetTypePowerUp(PowerUpType _type)
+        {
+            PowerUpBase val = null;
+
+            foreach (PowerUpBase powerUp in powerUps)
+                if (powerUp._powerUpType == _type)
+                {
+                    val = powerUp;
+                    break;
+                }
+            return val;
+        }
+
+        public PowerUpBase GetRandomPowerUp()
+        {
+            PowerUpBase val = null;
+
+            val = powerUps[Random.Range(0, powerUps.Count)];
+
+            return val;
         }
         #endregion
     }

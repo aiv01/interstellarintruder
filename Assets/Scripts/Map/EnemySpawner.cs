@@ -20,8 +20,8 @@ public class EnemySpawner : Spawner
 
     public override void Spawn()
     {
-        //myEnemy = Instantiate<Enemy>(enemyToSpawn,this.transform,false);
-        
+        myEnemy = Instantiate<Enemy>(enemyToSpawn, this.transform, false);
+
         TileInfo.enemyCounter += 1;
     }
     
