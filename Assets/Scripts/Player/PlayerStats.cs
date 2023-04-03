@@ -5,8 +5,8 @@ public class PlayerStats : StatsModule
 {
     #region Speed Attack Variable - Property
     //Attack Speed
-    private readonly float maxAttackSpeed = 20.0f;
-    private float currentAttackSpeed = 1.0f;
+    private readonly float maxAttackSpeed = 2.0f;
+    private float currentAttackSpeed = .5f;
     public float SpeedAttack
     {
         get => currentAttackSpeed;
@@ -20,8 +20,8 @@ public class PlayerStats : StatsModule
 
     #region Speed Movement Variable - Property
     //Speed Movement
-    private readonly float maxSpeedMovement = 20.0f;
-    private float currentSpeedMovement = 1.0f;
+    private readonly float maxSpeedMovement = 2.0f;
+    private float currentSpeedMovement = .1f;
     public float SpeedMovement
     {
         get => currentSpeedMovement;

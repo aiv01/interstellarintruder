@@ -14,6 +14,7 @@ namespace Weapon
 
         #region Private Variable
         private Shooting _shooting;
+        private PlayerStats _playerStats;
 
         private float reloadTime = 5.0f;
         private float counterReload = 0;
@@ -25,6 +26,7 @@ namespace Weapon
         {
             counterAmmo = ammo;
             _shooting = GetComponent<Shooting>();
+            _playerStats = GetComponentInParent<PlayerStats>();
         }
 
         void Update()
@@ -32,7 +34,7 @@ namespace Weapon
             if(counterAmmo <= 0)
             {
                 counterReload += Time.deltaTime;
-                if (counterReload > reloadTime)
+                if (counterReload > reloadTime - _playerStats.SpeedAttack)
                 {
                     counterAmmo = ammo;
                     counterReload = 0;

@@ -12,8 +12,7 @@ namespace Weapon.Shoot
 
         private Camera _camera;
         private PlayerMgr _playerMgr;
-        private float shootCoolDown = 1.0f;
-        private float lastFire = -10.0f;
+        private PlayerStats _playerStats;
         private bool _shooted = false;
         private float shootCount = 1.0f;
         private float shootCounter = 0.0f;
@@ -21,6 +20,7 @@ namespace Weapon.Shoot
         private void Awake()
         {
             _playerMgr = GetComponentInParent<PlayerMgr>();
+            _playerStats = GetComponent<PlayerStats>();
             _camera = Camera.main;
         }
 
@@ -44,7 +44,7 @@ namespace Weapon.Shoot
             if (_shooted)
             {
                 shootCounter += Time.deltaTime;
-                if (shootCounter > shootCount)
+                if (shootCounter > shootCount - (shootCount * _playerStats.SpeedAttack / 10))
                 {
                     shootCounter = 0.0f;
                     _shooted = false;
