@@ -4,7 +4,6 @@ using Weapon.Shoot;
 
 public class GranadierRangeAttack : State
 {
-    ShootingEnemy _shooting;
     public GranadierRangeAttack(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats, EnemyAI _enemy) : base(_entity, _agent, _anim, _player, _stats, _enemy)
     {
         stateType = STATE.RangeAttack;
@@ -14,7 +13,6 @@ public class GranadierRangeAttack : State
     {
         
         agent.isStopped = true;
-        _shooting = entity.gameObject.GetComponentInChildren<ShootingEnemy>();
         //anim.SetTrigger("TurnTrigger");
         base.Enter();
     }
@@ -32,7 +30,6 @@ public class GranadierRangeAttack : State
         if(angle < 5f)
         {
             anim.SetTrigger("RangeAttack");
-            _shooting.ShootEnemy();
         }
         
         if (Die())
