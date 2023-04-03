@@ -11,7 +11,7 @@ public class PowerUpSpawner : Spawner
     {
         myPower = null;
     }
-    private void Start()
+    private void Awake()
     {
         Init();
     }
