@@ -29,16 +29,6 @@ namespace Weapon
             return true;
         }
 
-        public void ShootEnemy()
-        {
-            if (Time.time < lastFire + 2.5f)
-                return;
-            lastFire = Time.time;
-            Bullet instance = bulletPool.GetBullet();
-            instance.transform.position = transform.TransformPoint(mouthOfFire);
-            instance.transform.forward = -transform.right;
-        }
-
         public void ShootPlayer()
         {
             var canShoot = CanShoot();

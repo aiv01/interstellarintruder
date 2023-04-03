@@ -1,4 +1,3 @@
-using Stats.Health;
 using UnityEngine;
 
 namespace Weapon.Projectile

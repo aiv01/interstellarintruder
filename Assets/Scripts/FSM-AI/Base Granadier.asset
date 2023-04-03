@@ -20,5 +20,5 @@ MonoBehaviour:
   speed: 2
   chaseSpeed: 4
   rotationSpeed: 2
-  healthPoint: 10
+  healthPoint: 5.8
   attackDamage: 5
