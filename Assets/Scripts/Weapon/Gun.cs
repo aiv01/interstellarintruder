@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Weapon.Shoot;
 
 namespace Weapon
@@ -10,6 +12,8 @@ namespace Weapon
         private Transform _handPlayer;
         [SerializeField]
         private Transform _gunHoldPosition;
+        [SerializeField]
+        private Image _gunReload;
         #endregion
 
         #region Private Variable
@@ -34,10 +38,12 @@ namespace Weapon
             if(counterAmmo <= 0)
             {
                 counterReload += Time.deltaTime;
+                _gunReload.fillAmount = ((counterReload * reloadTime / 100) + counterReload) / reloadTime;
                 if (counterReload > reloadTime - _playerStats.SpeedAttack)
                 {
                     counterAmmo = ammo;
                     counterReload = 0;
+                    _gunReload.fillAmount = 1;
                 }
             }
         }

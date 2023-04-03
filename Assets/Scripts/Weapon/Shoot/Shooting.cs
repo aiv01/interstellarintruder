@@ -20,7 +20,7 @@ namespace Weapon.Shoot
         private void Awake()
         {
             _playerMgr = GetComponentInParent<PlayerMgr>();
-            _playerStats = GetComponent<PlayerStats>();
+            _playerStats = GetComponentInParent<PlayerStats>();
             _camera = Camera.main;
         }
 
