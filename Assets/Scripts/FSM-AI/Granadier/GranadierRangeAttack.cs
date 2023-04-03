@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Weapon;
+using Weapon.Shoot;
 
 public class GranadierRangeAttack : State
 {
@@ -14,7 +14,7 @@ public class GranadierRangeAttack : State
     {
         
         agent.isStopped = true;
-        _shooting = entity.gameObject.GetComponentInChildren<Shooting>();
+        _shooting = entity.gameObject.GetComponentInChildren<ShootingEnemy>();
         //anim.SetTrigger("TurnTrigger");
         base.Enter();
     }

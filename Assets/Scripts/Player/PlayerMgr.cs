@@ -15,7 +15,7 @@ public class PlayerMgr : MonoBehaviour
     #endregion
 
     #region Private Variable
-    private PlayerInput _playerInput;
+    public PlayerInput _playerInput;
     private PlayerAttack _characterAttack;
     private Gun _gunComponent;
     private Staff _staffComponent;

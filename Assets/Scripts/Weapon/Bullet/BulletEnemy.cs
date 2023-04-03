@@ -1,12 +1,14 @@
 using Stats.Health;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapon.Projectile
 {
     public class BulletEnemy : Bullet
     {
+        private void Start()
+        {
+        }
+
         void Update()
         {
             timer += Time.deltaTime;
@@ -19,7 +21,6 @@ namespace Weapon.Projectile
         {
             if (other.gameObject.tag == "Player")
             {
-                Debug.Log("Hit " + other.gameObject.tag);
                 Die();
                 var stats = other.gameObject.GetComponent<StatsModule>();
                 stats.Health -= ((bulletDamage * stats.Damage / 100) + bulletDamage);

@@ -702,6 +702,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33215d122290bfc448049c7eab85f23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &856943009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856942996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c477428d2e9b2d64d95b4a2816fe838b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPool: {fileID: 779809068}
+  mouthOfFire: {x: 0, y: 3.5, z: 0}
 --- !u!114 &1003573209 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8788153286619166091, guid: 921953e1eae15b54bb9e54707ad84def, type: 3}

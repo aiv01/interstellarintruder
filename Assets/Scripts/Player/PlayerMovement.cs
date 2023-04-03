@@ -61,6 +61,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void HurtDirection(Transform other)
     {
+        /*
+        var offset = new Vector2(other.position.x - transform.position.x, other.position.y - transform.position.y);
+        var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+
+        _animator.SetFloat("HurtFromX", angle);
+        _animator.SetFloat("HurtFromY", angle);
+        */
+        _animator.SetFloat("HurtFromX", 1);
+        /*
         if (other.position.x < transform.position.x)
             _animator.SetFloat("HurtFromX", -1);
         else if (other.position.x > transform.position.x)
@@ -70,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetFloat("HurtFromY", -1);
         else if (other.position.z > transform.position.z)
             _animator.SetFloat("HurtFromY", 1);
+        */
     }
 
     private void Die()
