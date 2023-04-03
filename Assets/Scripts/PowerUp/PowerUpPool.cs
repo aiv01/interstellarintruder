@@ -16,7 +16,7 @@ namespace PowerUp
         private List<PowerUpBase> powerUps = new List<PowerUpBase>();
         #endregion
 
-        void Awake()
+        void Start()
         {
             FillPool();
         }

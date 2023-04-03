@@ -13,7 +13,7 @@ public abstract class Spawner : MonoBehaviour
         }
     }
     
-    public void Start()
+    protected virtual void Start()
     {
         tileInfo = GetComponentInParent<IsaacTileInfo>();
     }

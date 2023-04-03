@@ -5,7 +5,7 @@ using Weapon;
 public class GranadierRangeAttack : State
 {
     Shooting _shooting;
-    public GranadierRangeAttack(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats) : base(_entity, _agent, _anim, _player, _stats)
+    public GranadierRangeAttack(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats, EnemyAI _enemy) : base(_entity, _agent, _anim, _player, _stats, _enemy)
     {
         stateType = STATE.RangeAttack;
     }
@@ -34,18 +34,23 @@ public class GranadierRangeAttack : State
             anim.SetTrigger("RangeAttack");
             _shooting.ShootEnemy();
         }
+        
         if (Die())
         {
-            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            nextState = new GranadierDie(entity, agent, anim, player, stats, enemy);
+            stage = EVENT.Exit;
+        } else if (Hit())
+        {
+            nextState = new GranadierHit(entity, agent, anim, player, stats, enemy);
             stage = EVENT.Exit;
         }
         if (CanMeleePlayer())
         {
-            nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats);
+            nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats, enemy);
             stage = EVENT.Exit;
         } else if (!CanShootPlayer())
         {
-            nextState = new GranadierIdle(entity, agent, anim, player, stats);
+            nextState = new GranadierIdle(entity, agent, anim, player, stats, enemy);
             stage = EVENT.Exit;
         }
     }

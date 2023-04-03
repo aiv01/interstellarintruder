@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField]
-    private Enemy enemyPrefab;
+    private EnemyAI enemyPrefab;
 
     private int poolSize = 10;
-    private List<Enemy> pool = new List<Enemy>();
+    private List<EnemyAI> pool = new List<EnemyAI>();
 
-    private void Awake()
+    private void Start()
     {
         FillPool();
     }
@@ -21,25 +21,24 @@ public class EnemyPool : MonoBehaviour
             CreateInstance();
     }
 
-    private Enemy CreateInstance()
+    private EnemyAI CreateInstance()
     {
-        Enemy instance = Instantiate(enemyPrefab);
-        //instance.gameObject.SetActive(false);
+        EnemyAI instance = Instantiate(enemyPrefab);
+        instance.gameObject.SetActive(false);
         instance.transform.SetParent(transform);
         pool.Add(instance);
         return instance;
     }
 
-    public Enemy GetEnemy()
+    public EnemyAI GetEnemy()
     {
-        Enemy val = null;
-        foreach (Enemy eneemy in pool)
+        EnemyAI val = null;
+        foreach (EnemyAI eneemy in pool)
             if (!eneemy.gameObject.activeSelf)
             {
                 val = eneemy;
                 break;
             }
-        val.gameObject.SetActive(true);
         return val;
     }
 }

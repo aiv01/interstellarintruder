@@ -32,9 +32,10 @@ public class State
     protected State nextState;
     protected NavMeshAgent agent;
     protected GranadierStats stats;
+    protected EnemyAI enemy;
     
 
-    public State(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats)
+    public State(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats, EnemyAI _enemy)
     {
         entity = _entity;
         agent = _agent;
@@ -42,6 +43,7 @@ public class State
         player = _player;
         stats = _stats;
         stage = EVENT.Enter;
+        enemy = _enemy;
     }
 
     
@@ -104,7 +106,12 @@ public class State
 
     public bool Die()
     {
-        return stats.healthPoint <= 0.0f;
+        return enemy.currentHp <= 0.0f;
+    }
+
+    public bool Hit()
+    {
+        return enemy.Hitted;
     }
     
 }

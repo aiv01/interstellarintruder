@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GranadierChase : State
 {
-    public GranadierChase(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats) : base(_entity, _agent, _anim, _player, _stats)
+    public GranadierChase(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats, EnemyAI _enemy) : base(_entity, _agent, _anim, _player, _stats, _enemy)
     {
         stateType = STATE.Chase;
         agent.speed = stats.chaseSpeed;
@@ -23,22 +23,27 @@ public class GranadierChase : State
         agent.SetDestination(player.position);
         if (Die())
         {
-            nextState = new GranadierDie(entity, agent, anim, player, stats);
+            nextState = new GranadierDie(entity, agent, anim, player, stats, enemy);
+            stage = EVENT.Exit;
+        }
+        else if (Hit())
+        {
+            nextState = new GranadierHit(entity, agent, anim, player, stats, enemy);
             stage = EVENT.Exit;
         }
         if (agent.hasPath)
         {
             if (CanMeleePlayer())
             {
-                nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats);
+                nextState = new GranadierMeleeAttack(entity, agent, anim, player, stats, enemy);
                 stage = EVENT.Exit;
             }else if (CanShootPlayer())
             {
-                nextState = new GranadierRangeAttack(entity, agent, anim, player, stats);
+                nextState = new GranadierRangeAttack(entity, agent, anim, player, stats, enemy);
                 stage = EVENT.Exit;
             } else if(!CanSeePlayer())
             {
-                nextState = new GranadierIdle(entity, agent, anim, player, stats);
+                nextState = new GranadierIdle(entity, agent, anim, player, stats, enemy);
                 stage = EVENT.Exit;
             }
 

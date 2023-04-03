@@ -1,27 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
     [SerializeField]
-    private Enemy enemyToSpawn;
-    private Enemy myEnemy;
+    private EnemyAI myEnemy;
+    [SerializeField]
+    private List<Transform> myWaypoints;
     private EnemyPool _enemyPool;
 
-    private void Awake()
+
+    protected override void Start()
     {
-        _enemyPool = GetComponent<EnemyPool>();
-        _enemyPool.FillPool();
+        _enemyPool = FindObjectOfType<EnemyPool>();
+        TileInfo.enemyCounter++;
+        base.Start();
     }
 
     public override void Despawn()
     {
-        Destroy(myEnemy);
+        myEnemy.gameObject.SetActive(false);
+        myEnemy.waypoints = null;
+        myEnemy = null;
     }
 
     public override void Spawn()
     {
-        myEnemy = Instantiate<Enemy>(enemyToSpawn, this.transform, false);
-
+        myEnemy = _enemyPool.GetEnemy();
+        myEnemy.transform.position = transform.position;
+        myEnemy.waypoints = myWaypoints;
+        myEnemy.myTile = TileInfo;
+        myEnemy.gameObject.SetActive(true);
         TileInfo.enemyCounter += 1;
     }
     

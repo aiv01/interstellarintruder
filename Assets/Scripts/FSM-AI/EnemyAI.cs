@@ -6,22 +6,33 @@ using Weapon.Projectile;
 
 public class EnemyAI : MonoBehaviour
 {
-    public delegate void EnemyDelegate(EnemyAI enemyDeath);
-    public event EnemyDelegate OnDeath = null;
-
     NavMeshAgent agent;
     Animator anim;
     State currentState;
-
     public Transform player;
     public GranadierStats stats;
     public List<Transform> waypoints;
+    public float currentHp;
+    public bool Hitted = false;
+    public IsaacTileInfo myTile;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        currentState = new GranadierIdle(gameObject, agent, anim, player,stats);
+    }
+
+    private void OnEnable()
+    {
+        currentState = new GranadierIdle(gameObject, agent, anim, player, stats, this);
+        currentHp = stats.healthPoint;
+        if (player == null) player = GameObject.Find("Ellen").transform;
+    }
+
+    private void OnDisable()
+    {
+        currentState = null;
+        currentHp = -1;
     }
 
     private void Update()
@@ -29,14 +40,4 @@ public class EnemyAI : MonoBehaviour
         currentState = currentState.Process();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (stats.healthPoint <= 0)
-            Die();
-    }
-
-    private void Die()
-    {
-        OnDeath?.Invoke(this);
-    }
 }

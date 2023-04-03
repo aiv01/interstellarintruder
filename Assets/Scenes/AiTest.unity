@@ -1133,6 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPool: {fileID: 779809068}
+  animator: {fileID: 0}
   mouthOfFire: {x: -2, y: 0, z: 0}
 --- !u!1001 &2021926440
 PrefabInstance:
