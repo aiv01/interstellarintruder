@@ -1,10 +1,6 @@
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering.UI;
 
 [System.Serializable]
 public class MyDoorEvent : UnityEvent<isaacDoorDirection>

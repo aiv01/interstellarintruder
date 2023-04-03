@@ -73,7 +73,6 @@ public class IsaacGeneratorSO : MonoBehaviour{
                     {
                         continue;
                     }
-                    Debug.Log(CellNum);
                     oldTile.SetDoor((isaacDoorDirection)x);
                     newTile = new IsaacTile();
                     newTile.SetOppositeDoor((isaacDoorDirection)x);

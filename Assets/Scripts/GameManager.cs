@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(_playerInput.Input.Esc.triggered)
-        {
-            SceneManager.LoadScene("Menu Change Scene");
-        }
+        //if(_playerInput.Input.Pause.triggered)
+        //{
+        //    SceneManager.LoadScene("Menu Change Scene");
+        //}
     }
 
     public void ChangeLevel()

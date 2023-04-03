@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerUpSpawner : Spawner
 {
-    private PowerUp.PowerUp pool;
+    private PowerUpBase pool;
     public override void Despawn()
     {
         throw new System.NotImplementedException();

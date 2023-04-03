@@ -1,49 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Weapon.Projectile;
 
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField]
-    private GranadierStats _stats;
-    [SerializeField]
-    private EnemyAI enemyPrefab;
+    private Enemy enemyPrefab;
 
     private int poolSize = 10;
-    private List<EnemyAI> pool = new List<EnemyAI>();
+    private List<Enemy> pool = new List<Enemy>();
 
     private void Awake()
     {
         FillPool();
     }
 
-    private void FillPool()
+    public void FillPool()
     {
         for (int i = 0; i < poolSize; i++)
             CreateInstance();
     }
 
-    private EnemyAI CreateInstance()
+    private Enemy CreateInstance()
     {
-        EnemyAI instance = Instantiate<EnemyAI>(enemyPrefab);
-        instance.gameObject.SetActive(false);
+        Enemy instance = Instantiate(enemyPrefab);
+        //instance.gameObject.SetActive(false);
         instance.transform.SetParent(transform);
         pool.Add(instance);
         return instance;
     }
 
-    public EnemyAI GetBullet()
+    public Enemy GetEnemy()
     {
-        EnemyAI val = null;
-        foreach (EnemyAI eneemy in pool)
+        Enemy val = null;
+        foreach (Enemy eneemy in pool)
             if (!eneemy.gameObject.activeSelf)
             {
                 val = eneemy;
                 break;
             }
-        if (val == null)
-            val = CreateInstance();
         val.gameObject.SetActive(true);
         return val;
     }

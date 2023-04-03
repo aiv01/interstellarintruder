@@ -35,16 +35,16 @@ public class PlayerRotation : MonoBehaviour
             else
                 RotationKeyBoard_TopDown();
         }
-
-        RotationGamepad();
+        else
+            RotationGamepad();
         
     }
 
     #region KeyBoard
     private void RotationKeyBoard_TopDown()
     {
-        var mousePos = _playerInput.Input.Rotation_TopDown.ReadValue<Vector2>();
-        var screenPoint = Camera.main.WorldToScreenPoint(transform.localPosition);
+        var mousePos = _playerInput.Input.MousePosition.ReadValue<Vector2>();
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         var offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
         var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, -angle + 90, 0);
@@ -52,7 +52,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void RotationKeyBoard_3rdPerson()
     {
-        var rotation = _playerInput.Input.Rotation_3rdPerson.ReadValue<Vector2>();
+        var rotation = _playerInput.Input.DeltaMouse.ReadValue<Vector2>();
         transform.Rotate(new Vector3(0, rotation.x));
     }
     #endregion
