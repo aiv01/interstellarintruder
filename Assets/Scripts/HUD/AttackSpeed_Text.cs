@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AttackSpeed_Text : MonoBehaviour
+public class AttackSpeed_Text : Text_StatsPlayer
 {
-    [SerializeField]
-    private PlayerStats _stats;
     [SerializeField]
     private Text _text;
 
     private void Update()
     {
-        _text.text = _stats.SpeedAttack.ToString();
+        _text.text = StatsPlayer.SpeedAttack.ToString();
     }
 }

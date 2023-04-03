@@ -46,13 +46,12 @@ public class PlayerMovement : MonoBehaviour
         _controller.transform.position = pos;
         _controller.enabled = true;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "Bullet")
         {
-            if (other.gameObject.tag == "Enemy")
-                _stats.Health -= other.gameObject.GetComponent<EnemyAI>().stats.attackDamage;
-            HurtDirection(other.transform);
+            HurtDirection(hit.transform);
             _animator.SetTrigger("Hurt");
         }
         if (_stats.Health <= 0)

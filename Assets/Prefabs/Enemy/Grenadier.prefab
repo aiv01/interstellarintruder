@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 1620568995476305477}
   - component: {fileID: -3140861283384178985}
   - component: {fileID: 1210349196540147983}
+  - component: {fileID: 6081755127532059551}
   m_Layer: 7
   m_Name: Grenadier
   m_TagString: Enemy
@@ -573,8 +574,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c477428d2e9b2d64d95b4a2816fe838b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 0}
-  mouthOfFire: {x: 0, y: 0, z: 0}
+  mouthOfFire: {x: 0, y: 3.5, z: 0}
+--- !u!136 &6081755127532059551
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055063078037888638}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.4274218
+  m_Height: 3.3798366
+  m_Direction: 1
+  m_Center: {x: 0.0603199, y: 1.8835995, z: -0.05278051}
 --- !u!1 &3055063078037888924
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HP_Text : MonoBehaviour
+public class HP_Text : Text_StatsPlayer
 {
     [SerializeField]
     private Text _text;
-    [SerializeField]
-    private PlayerStats _stats;
 
     private void Update()
     {
-        _text.text = _stats.Health.ToString();
+        _text.text = StatsPlayer.Health.ToString();
     }
 }
