@@ -13,11 +13,10 @@ public abstract class Spawner : MonoBehaviour
         }
     }
     
-    protected virtual void Start()
+    public virtual void Init()
     {
         tileInfo = GetComponentInParent<IsaacTileInfo>();
     }
-
     public abstract void Spawn();
     public abstract void Despawn();
 }

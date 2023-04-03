@@ -15,11 +15,16 @@ public class EnemyAI : MonoBehaviour
     public float currentHp;
     public bool Hitted = false;
     public IsaacTileInfo myTile;
+    public NavMeshAgent Agent
+    {
+        get { if(agent == null) { agent = GetComponent<NavMeshAgent>(); } return agent; }
+    }
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        gameObject.SetActive(false) ;
     }
 
     private void OnEnable()

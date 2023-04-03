@@ -23,9 +23,7 @@ public class EnemyPool : MonoBehaviour
 
     private EnemyAI CreateInstance()
     {
-        EnemyAI instance = Instantiate(enemyPrefab);
-        instance.gameObject.SetActive(false);
-        instance.transform.SetParent(transform);
+        EnemyAI instance = Instantiate(enemyPrefab,transform);
         pool.Add(instance);
         return instance;
     }

@@ -84,7 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   visited: 0
-  Spawners: []
+  Spawners:
+  - {fileID: 1887013456781125546}
   Doors:
   - {fileID: 1029750407315498492}
   enemyCounter: 0
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05811b5ee2ea76e45815fdc3517c4429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myEnemy: {fileID: 0}
+  enemyToSpawn: {fileID: 3055063078037985473, guid: c5a2ad32f22bc5347afb254340cc18e9, type: 3}
   myWaypoints:
   - {fileID: 8195090764720879209}
   - {fileID: 5533740877048828064}

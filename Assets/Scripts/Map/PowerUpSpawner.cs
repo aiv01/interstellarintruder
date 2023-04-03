@@ -11,10 +11,14 @@ public class PowerUpSpawner : Spawner
     {
         myPower = null;
     }
-
-    protected override void Start()
+    private void Start()
+    {
+        Init();
+    }
+    public override void Init()
     {
         pool = FindObjectOfType<PowerUpPool>();
+        base.Init();
     }
 
     public override void Spawn()

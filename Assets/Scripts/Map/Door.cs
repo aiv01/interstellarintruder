@@ -29,14 +29,15 @@ public class Door : MonoBehaviour
     public void Awake()
     {
         input = new PlayerInput();
-    }
-    public void Start()
-    {
-        if(roomManager == null) roomManager = RoomManager.FindObjectOfType<RoomManager>();
+        if (roomManager == null) roomManager = RoomManager.FindObjectOfType<RoomManager>();
         animator = GetComponent<Animator>();
         doorEvent = new MyDoorEvent();
         doorEvent.AddListener(roomManager.DoorWarp);
     }
+   
+    
+        
+    
     public Vector3 SpawnPlayer()
     {
         switch (doorDirection)
@@ -63,7 +64,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(input.Input.Interaction.ReadValue<float>() > 0 && other.CompareTag("Player"))
+        if(input.Input.Interaction.ReadValue<float>() > 0 && other.CompareTag("Player") && doorOpen)
         doorEvent.Invoke(doorDirection);
         
     }
