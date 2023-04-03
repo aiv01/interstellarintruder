@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     public GranadierStats stats;
     public List<Transform> waypoints;
     public float currentHp;
+    public float currentAttackDamage;
     public bool Hitted = false;
     public IsaacTileInfo myTile;
     public NavMeshAgent Agent
@@ -31,6 +32,7 @@ public class EnemyAI : MonoBehaviour
     {
         currentState = new GranadierIdle(gameObject, agent, anim, player, stats, this);
         currentHp = stats.healthPoint;
+        currentAttackDamage = stats.attackDamage;
         if (player == null) player = GameObject.Find("Ellen").transform;
     }
 

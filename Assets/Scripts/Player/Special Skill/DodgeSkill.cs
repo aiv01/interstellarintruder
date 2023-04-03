@@ -5,7 +5,16 @@ namespace PlayerFile.SpecialSkill
 {
     public class DodgeSkill : MonoBehaviour
     {
-        public Image imageSkill;
+        private Image imageSkill;
+        public Image ImageDodgeSkill
+        {
+            get
+            {
+                if(imageSkill == null)
+                    imageSkill = GameObject.Find("Dodge Skill").GetComponent<Image>();
+                return imageSkill;
+            }
+        }
 
         #region Private Variable
         private PlayerInput _playerInput;
@@ -29,9 +38,9 @@ namespace PlayerFile.SpecialSkill
         void Update()
         {
             timerCoolDown += Time.deltaTime;
-            if(imageSkill.fillAmount < 1)
+            if(ImageDodgeSkill.fillAmount < 1)
             {
-                imageSkill.fillAmount = ((timerCoolDown * coolDown / 100) + timerCoolDown) / coolDown;
+                ImageDodgeSkill.fillAmount = ((timerCoolDown * coolDown / 100) + timerCoolDown) / coolDown;
             }
             if (timerCoolDown > coolDown)
                 isTeleporting = false;
@@ -42,7 +51,7 @@ namespace PlayerFile.SpecialSkill
 
             if (_playerInput.Input.ActiveSkill.triggered && !isTeleporting)
             {
-                imageSkill.fillAmount = 0;
+                ImageDodgeSkill.fillAmount = 0;
                 isTeleporting = true;
                 timerCoolDown = 0.0f;
                 ControlDistanceDodge();

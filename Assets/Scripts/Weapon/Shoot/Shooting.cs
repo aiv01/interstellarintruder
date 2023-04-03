@@ -6,16 +6,27 @@ namespace Weapon.Shoot
     public class Shooting : MonoBehaviour
     {
         [SerializeField]
-        private BulletPool bulletPool = null;
-        [SerializeField]
         private Vector3 mouthOfFire;
 
+        #region Private Variable
+        private BulletPool bulletPool = null;
         private Camera _camera;
         private PlayerMgr _playerMgr;
         private PlayerStats _playerStats;
         private bool _shooted = false;
         private float shootCount = 1.0f;
         private float shootCounter = 0.0f;
+        #endregion
+
+        public BulletPool BulletPool
+        {
+            get
+            {
+                if (bulletPool == null)
+                    bulletPool = GameObject.Find("BulletPool Player").GetComponent<BulletPool>();
+                return bulletPool;
+            }
+        }
 
         private void Awake()
         {
@@ -57,7 +68,7 @@ namespace Weapon.Shoot
             if (_shooted)
                 return false;
             _shooted = true;
-            Bullet instance = bulletPool.GetBullet();
+            Bullet instance = BulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
             instance.transform.forward = transform.right;
             if (_playerMgr.Is3rdPerson)

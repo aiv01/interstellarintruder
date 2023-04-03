@@ -20,7 +20,7 @@ namespace Weapon
             if (other.gameObject.tag == "Enemy")
             {
                 var enemy = other.gameObject.GetComponent<EnemyAI>();
-                enemy.stats.healthPoint-= ((damage * enemy.stats.attackDamage / 100) + damage);
+                enemy.currentHp -= ((damage * enemy.stats.attackDamage / 100) + damage);
             }
         }
     }

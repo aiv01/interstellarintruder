@@ -35,7 +35,7 @@ public class EnemySpawner : Spawner
         myEnemy = _enemyPool.GetEnemy();
         myEnemy.Agent.Warp(transform.position);
         myEnemy.transform.SetParent(transform, true);
-        myEnemy.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        myEnemy.transform.localScale = new Vector3(.5f, 0.5f, 0.5f);
         myEnemy.waypoints = myWaypoints;
         myEnemy.myTile = TileInfo;
         myEnemy.gameObject.SetActive(true);

@@ -12,8 +12,6 @@ namespace Weapon
         private Transform _handPlayer;
         [SerializeField]
         private Transform _gunHoldPosition;
-        [SerializeField]
-        private Image _gunReload;
         #endregion
 
         #region Private Variable
@@ -25,6 +23,17 @@ namespace Weapon
         private int ammo = 7;
         private int counterAmmo;
         #endregion
+
+        private Image _gunReload;
+        public Image ImageGunReload
+        {
+            get
+            {
+                if (_gunReload == null)
+                    _gunReload = GameObject.Find("Gun Reload").GetComponent<Image>();
+                return _gunReload;
+            }
+        }
 
         private void Awake()
         {
@@ -38,12 +47,12 @@ namespace Weapon
             if(counterAmmo <= 0)
             {
                 counterReload += Time.deltaTime;
-                _gunReload.fillAmount = ((counterReload * reloadTime / 100) + counterReload) / reloadTime;
+                ImageGunReload.fillAmount = ((counterReload * reloadTime / 100) + counterReload) / reloadTime;
                 if (counterReload > reloadTime - _playerStats.SpeedAttack)
                 {
                     counterAmmo = ammo;
                     counterReload = 0;
-                    _gunReload.fillAmount = 1;
+                    ImageGunReload.fillAmount = 1;
                 }
             }
         }

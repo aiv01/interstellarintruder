@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MovementSpeed_Text : MonoBehaviour
+public class MovementSpeed_Text : Text_StatsPlayer
 {
-    [SerializeField]
-    private PlayerStats _stats;
     [SerializeField]
     private Text _text;
 
     private void Update()
     {
-        _text.text = _stats.SpeedMovement.ToString();
+        _text.text = StatsPlayer.SpeedMovement.ToString();
     }
 }

@@ -32,7 +32,7 @@ namespace Weapon.Projectile
             if(other.gameObject.tag == "Enemy")
             {
                 var enemy = other.gameObject.GetComponent<EnemyAI>();
-                enemy.currentHp -= ((bulletDamage * enemy.stats.attackDamage / 100) + bulletDamage);
+                enemy.currentHp -= bulletDamage;
                 enemy.Hitted = true;
             }
         }
