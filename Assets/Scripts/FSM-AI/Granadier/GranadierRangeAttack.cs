@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Weapon;
+using Weapon.Shoot;
 
 public class GranadierRangeAttack : State
 {

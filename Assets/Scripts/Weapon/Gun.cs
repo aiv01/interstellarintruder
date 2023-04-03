@@ -1,5 +1,5 @@
 using UnityEngine;
-using Weapon.Projectile;
+using Weapon.Shoot;
 
 namespace Weapon
 {
@@ -29,7 +29,7 @@ namespace Weapon
 
         void Update()
         {
-            if(counterAmmo < 0)
+            if(counterAmmo <= 0)
             {
                 counterReload += Time.deltaTime;
                 if (counterReload > reloadTime)
@@ -57,11 +57,12 @@ namespace Weapon
 
         public bool CountAmmo()
         {
-            counterAmmo--;
-            if (counterAmmo >= 0)
-                _shooting.ShootPlayer();
-            
-            return counterAmmo >= 0;
+            if (counterAmmo > 0 && _shooting.ShootPlayer())
+            {
+                counterAmmo--;
+                return true;
+            }
+            return false;
         }
     }
 }

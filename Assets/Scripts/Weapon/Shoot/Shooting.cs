@@ -1,7 +1,7 @@
 using UnityEngine;
 using Weapon.Projectile;
 
-namespace Weapon
+namespace Weapon.Shoot
 {
     public class Shooting : MonoBehaviour
     {
@@ -12,8 +12,11 @@ namespace Weapon
 
         private Camera _camera;
         private PlayerMgr _playerMgr;
-        private float shootCoolDown = 0.2f;
+        private float shootCoolDown = 1.0f;
         private float lastFire = -10.0f;
+        private bool _shooted = false;
+        private float shootCount = 1.0f;
+        private float shootCounter = 0.0f;
 
         private void Awake()
         {
@@ -21,25 +24,45 @@ namespace Weapon
             _camera = Camera.main;
         }
 
-        private bool CanShoot()
+        void Update()
+        {
+            CanShoot();
+        }
+
+        /*
+        public bool CanShoot()
         {
             if (Time.time < lastFire + shootCoolDown)
                 return false;
             lastFire = Time.time;
             return true;
         }
+        */
 
-        public void ShootPlayer()
+        private void CanShoot()
         {
-            var canShoot = CanShoot();
-            if (!canShoot)
-                return;
+            if (_shooted)
+            {
+                shootCounter += Time.deltaTime;
+                if (shootCounter > shootCount)
+                {
+                    shootCounter = 0.0f;
+                    _shooted = false;
+                }
+            }
+        }
 
+        public bool ShootPlayer()
+        {
+            if (_shooted)
+                return false;
+            _shooted = true;
             Bullet instance = bulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
             instance.transform.forward = transform.right;
             if (_playerMgr.Is3rdPerson)
                 Aim(instance);
+            return true;
         }
 
         private void Aim(Bullet instance)

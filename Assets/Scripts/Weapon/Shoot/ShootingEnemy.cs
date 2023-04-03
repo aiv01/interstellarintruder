@@ -1,7 +1,7 @@
 using UnityEngine;
 using Weapon.Projectile;
 
-namespace Weapon
+namespace Weapon.Shoot
 {
     public class ShootingEnemy : MonoBehaviour
     {
