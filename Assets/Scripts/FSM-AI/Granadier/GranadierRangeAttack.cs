@@ -4,7 +4,7 @@ using Weapon.Shoot;
 
 public class GranadierRangeAttack : State
 {
-    Shooting _shooting;
+    ShootingEnemy _shooting;
     public GranadierRangeAttack(GameObject _entity, NavMeshAgent _agent, Animator _anim, Transform _player, GranadierStats _stats, EnemyAI _enemy) : base(_entity, _agent, _anim, _player, _stats, _enemy)
     {
         stateType = STATE.RangeAttack;
