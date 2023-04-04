@@ -75,6 +75,19 @@ public class MenuManager : MonoBehaviour
     }
     #endregion
 
+    #region GameOver Scene
+
+    public void NewGame()
+    {
+
+    }
+
+    public void QuitGameOver()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+    #endregion
+
     #endregion
 
     #region Private Methods

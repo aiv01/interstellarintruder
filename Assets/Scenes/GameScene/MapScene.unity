@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &130203895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1331976497, guid: 2a7f33e91c1f97a4e8e0d28b86ae97cc, type: 3}
+  m_PrefabInstance: {fileID: 1795372723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &135344860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,6 +640,14 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1480225678}
+    - target: {fileID: 2782674055934857450, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
+      propertyPath: onPauseRequested.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 130203895}
+    - target: {fileID: 2782674055934857450, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
+      propertyPath: onPauseRequested.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 2782674055934857451, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1007,6 +1020,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1331976499, guid: 2a7f33e91c1f97a4e8e0d28b86ae97cc, type: 3}
+      propertyPath: onPauseLeft.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 552614724}
+    - target: {fileID: 1331976499, guid: 2a7f33e91c1f97a4e8e0d28b86ae97cc, type: 3}
+      propertyPath: onPauseLeft.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 3276521551199301091, guid: 2a7f33e91c1f97a4e8e0d28b86ae97cc, type: 3}
       propertyPath: m_Name
       value: Canvas

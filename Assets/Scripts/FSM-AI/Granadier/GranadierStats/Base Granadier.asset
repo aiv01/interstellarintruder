@@ -16,7 +16,7 @@ MonoBehaviour:
   nearDist: 1
   visAngle: 35
   rangeDist: 4
-  meleeDist: 1
+  meleeDist: 2
   speed: 2
   chaseSpeed: 4
   rotationSpeed: 2

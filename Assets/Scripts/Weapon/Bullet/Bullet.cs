@@ -35,6 +35,7 @@ namespace Weapon.Projectile
                 enemy.currentHp -= bulletDamage;
                 enemy.Hitted = true;
             }
+            Die();
         }
 
         protected void Die()

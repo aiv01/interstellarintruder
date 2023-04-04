@@ -20,6 +20,18 @@ public class PlayerMovement : MonoBehaviour
     private float runSpeed = 6.0f;
     #endregion
 
+    #region Property
+    bool isDeath = false;
+    public bool IsDeath
+    {
+        get
+        {
+            if (_stats.Health <= 0)
+                return true;
+            return false;
+        }
+    }
+
     private void Awake()
     {
         _playerInput = new PlayerInput();
@@ -33,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _movement = GetComponent<PlayerMovement>();
         _rotation = GetComponent<PlayerRotation>();
     }
+    #endregion
 
     void Update()
     {
@@ -52,10 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "Bullet")
         {
             HurtDirection(hit.transform);
-            _animator.SetTrigger("Hurt");
         }
-        if (_stats.Health <= 0)
-            Die();
     }
 
     private void HurtDirection(Transform other)
@@ -79,9 +89,10 @@ public class PlayerMovement : MonoBehaviour
         else if (other.position.z > transform.position.z)
             _animator.SetFloat("HurtFromY", 1);
         */
+        _animator.SetTrigger("Hurt");
     }
 
-    private void Die()
+    public void Death()
     {
         _animator.SetTrigger("Death");
         _controller.height = .5f;
