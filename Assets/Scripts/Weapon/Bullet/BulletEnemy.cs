@@ -29,6 +29,8 @@ namespace Weapon.Projectile
                 stats.Health -= bulletDamage;
                 if (_playerTarget.IsDeath)
                     _playerTarget.Death();
+                else
+                    _playerTarget.HurtDirection(transform);
             }
             Die();
         }

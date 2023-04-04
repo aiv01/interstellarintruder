@@ -11,17 +11,12 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStats _stats;
     private PlayerMgr _playerMgr;
 
-    private PlayerAttack _attack;
-    private PlayerMovement _movement;
-    private PlayerRotation _rotation;
-
     private Vector3 inputVector;
     private float walkSpeed = 1.0f;
     private float runSpeed = 6.0f;
     #endregion
 
     #region Property
-    bool isDeath = false;
     public bool IsDeath
     {
         get
@@ -40,16 +35,13 @@ public class PlayerMovement : MonoBehaviour
 
         _stats = GetComponent<PlayerStats>();
         _playerMgr = GetComponentInParent<PlayerMgr>();
-
-        _attack = GetComponent<PlayerAttack>();
-        _movement = GetComponent<PlayerMovement>();
-        _rotation = GetComponent<PlayerRotation>();
     }
     #endregion
 
     void Update()
     {
-        Move();
+        if(!IsDeath)
+            Move();
 
         _animator.SetBool("isRanged", !_playerMgr.IsMelee);
     }
@@ -60,46 +52,28 @@ public class PlayerMovement : MonoBehaviour
         _controller.enabled = true;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    public void HurtDirection(Transform bullet)
     {
-        if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "Bullet")
-        {
-            HurtDirection(hit.transform);
-        }
-    }
+        Vector3 pos = transform.InverseTransformPoint(bullet.position).normalized;
+        pos.y = 0;
 
-    private void HurtDirection(Transform other)
-    {
-        /*
-        var offset = new Vector2(other.position.x - transform.position.x, other.position.y - transform.position.y);
-        var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-
-        _animator.SetFloat("HurtFromX", angle);
-        _animator.SetFloat("HurtFromY", angle);
-        */
-        _animator.SetFloat("HurtFromX", 1);
-        /*
-        if (other.position.x < transform.position.x)
+        if (pos.x < 0)
             _animator.SetFloat("HurtFromX", -1);
-        else if (other.position.x > transform.position.x)
+        else
             _animator.SetFloat("HurtFromX", 1);
 
-        if (other.position.z < transform.position.z)
+        if (pos.z < 0)
             _animator.SetFloat("HurtFromY", -1);
-        else if (other.position.z > transform.position.z)
+        else
             _animator.SetFloat("HurtFromY", 1);
-        */
         _animator.SetTrigger("Hurt");
     }
 
     public void Death()
     {
         _animator.SetTrigger("Death");
-        _controller.height = .5f;
+        _controller.enabled = false;
         _stats.Health = 0;
-        _attack.enabled = false;
-        _movement.enabled = false;
-        _rotation.enabled = false;
     }
 
     #region Enable Disable

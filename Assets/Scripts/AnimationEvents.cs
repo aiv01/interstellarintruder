@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AnimationEvents : MonoBehaviour
 {
@@ -13,6 +12,11 @@ public class AnimationEvents : MonoBehaviour
     public void MeleeAttackEnd()
     {
 
+    }
+
+    public void GameOver()
+    {
+        //SceneManager.LoadScene("GameOverScene");
     }
     #endregion
 

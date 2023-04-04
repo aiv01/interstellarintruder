@@ -4,11 +4,13 @@ public class PlayerRotation : MonoBehaviour
 {
     private PlayerMgr _playerMgr;
     private PlayerInput _playerInput;
+    PlayerMovement _playerMovement;
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
         _playerMgr = GetComponentInParent<PlayerMgr>();
+        _playerMovement = GetComponentInParent<PlayerMovement>();
     }
 
     #region Enable Disable
@@ -25,16 +27,18 @@ public class PlayerRotation : MonoBehaviour
 
     void Update()
     {
-        if(!(_playerInput.Input.RotationGamePad.ReadValue<Vector2>() != Vector2.zero))
+        if (!_playerMovement.IsDeath)
         {
-            if (_playerMgr.Is3rdPerson)
-                RotationKeyBoard_3rdPerson();
+            if (!(_playerInput.Input.RotationGamePad.ReadValue<Vector2>() != Vector2.zero))
+            {
+                if (_playerMgr.Is3rdPerson)
+                    RotationKeyBoard_3rdPerson();
+                else
+                    RotationKeyBoard_TopDown();
+            }
             else
-                RotationKeyBoard_TopDown();
+                RotationGamepad();
         }
-        else
-            RotationGamepad();
-        
     }
 
     #region KeyBoard
