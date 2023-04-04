@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private PlayerInput _playerInput;
     public int level = 1;
+    public bool onLoad = false;
 
     private void Awake()
     {
@@ -38,6 +39,11 @@ public class GameManager : MonoBehaviour
     public void ChangeLevel()
     {
         level += 1;
-        SceneManager.LoadScene("MapTest");
+        SceneManager.LoadScene("MapScene");
+    }
+    public void LoadLevel()
+    {
+        onLoad = true;
+        SceneManager.LoadScene("MapScene");
     }
 }
