@@ -28,10 +28,10 @@ namespace Weapon.Shoot
 
         public void ShootEnemy()
         {
-            if (Time.time < lastFire + shootCoolDown)
-                return;
-            lastFire = Time.time;
-            Bullet instance = BulletPool.GetBullet();
+            //if (Time.time < lastFire + shootCoolDown)
+            //    return;
+            //lastFire = Time.time;
+            Bullet instance = bulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
             instance.transform.forward = transform.forward;
         }

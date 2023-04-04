@@ -36,8 +36,10 @@ public class IsaacGeneratorSO : MonoBehaviour{
     }
     private void Start()
     {
-        level = GameObject.Find("GameMgr").GetComponent<GameManager>().level;
-        GenerateMap();
+        GameManager gm = GameObject.Find("GameMgr").GetComponent<GameManager>();
+        level = gm.level;
+        if(!gm.onLoad)
+            GenerateMap();
     }
     public void Generate(Transform container, int width, int height)
         {
@@ -123,7 +125,7 @@ public class IsaacGeneratorSO : MonoBehaviour{
                     var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
                     var index = UnityEngine.Random.Range(0, tilePrefabs.Length);
                     var tilePrefab = tilePrefabs[index];
-                    tilePrefab.id = baseTilePath + " " + tiles[y, x].doors + baseTilePath + " " + tiles[y, x].doors /*+ " - " + index*/;
+                    tilePrefab.id = baseTilePath + " " + tiles[y, x].doors + baseTilePath + " " + tiles[y, x].doors + " - " + index;
                     tiles[y, x].info = tilePrefab;
                     if (tiles[y,x].doors == 1 || tiles[y,x].doors == 2 || tiles[y,x].doors==4 || tiles[y,x].doors == 8)
                         specialRooms.Add(tiles[y, x]);
@@ -138,8 +140,9 @@ public class IsaacGeneratorSO : MonoBehaviour{
         int index = UnityEngine.Random.Range(0, specialRooms.Count);
         var path = folderPath + specialPath + " " + specialRooms[index].doors;
         var tilePrefabs = Resources.LoadAll<IsaacTileInfo>(path);
-        var tilePrefab = tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Length)];
-        tilePrefab.id = specialPath + " " + specialRooms[index].doors + baseTilePath + " " + specialRooms[index].doors/*+ " - " + index*/;
+        var inex = UnityEngine.Random.Range(0, tilePrefabs.Length);
+        var tilePrefab = tilePrefabs[inex];
+        tilePrefab.id = specialPath + " " + specialRooms[index].doors + baseTilePath + " " + specialRooms[index].doors+ " - " + inex;
         specialRooms[index].info = tilePrefab;
         specialRooms.RemoveAt(index);
     }
@@ -149,6 +152,7 @@ public class IsaacGeneratorSO : MonoBehaviour{
     }
     public void LoadMap(Transform container, TileMapData data)
         {
+
         tiles = new IsaacTile[data.dimensions.x, data.dimensions.y];
         foreach (var info in data.tiles)
         {

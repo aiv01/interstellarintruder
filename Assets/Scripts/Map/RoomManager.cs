@@ -20,7 +20,8 @@ public class RoomManager : MonoBehaviour
     public WarpPlayer myWarp;
     private void Start()
     {
-        Init();
+        if(!GameObject.Find("GameMgr").GetComponent<GameManager>().onLoad)
+            Init();
     }
     public void Init()
     {
@@ -28,7 +29,8 @@ public class RoomManager : MonoBehaviour
         tilePos = new Vector2Int(isaacTileInfos.GetLength(0)/2, isaacTileInfos.GetLength(1)/2);
         currentTile = isaacTileInfos[tilePos.x, tilePos.y];
         currentTile.gameObject.SetActive(true);
-        player.position = currentTile.transform.position;
+        myWarp.Invoke(currentTile.transform.position);
+        currentTile.visited = true;
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }
@@ -39,6 +41,7 @@ public class RoomManager : MonoBehaviour
         currentTile = isaacTileInfos[pos.x,pos.y];
         currentTile.gameObject.SetActive(true);
         myWarp.Invoke(currentTile.transform.position);
+        currentTile.visited= true;
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }

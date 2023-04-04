@@ -16,10 +16,12 @@ public class MenuManager : MonoBehaviour
 
     #region Private Variable
     private GameObject selectedControl => EventSystem.current.currentSelectedGameObject;
+    private GameManager gameManager;
     #endregion
 
     void Awake()
     {
+        gameManager = FindObjectOfType<GameManager>();
         _playerInput = new PlayerInput();
     }
 
@@ -44,6 +46,7 @@ public class MenuManager : MonoBehaviour
     #region Start Menu Scene
     public void StartGame()
     {
+        gameManager.level = 1;
         SceneManager.LoadScene("MapScene");
     }
 

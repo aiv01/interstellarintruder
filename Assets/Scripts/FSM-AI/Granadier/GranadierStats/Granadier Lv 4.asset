@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4b23e59efcbf3488a6cb24635aaa54, type: 3}
+  m_Name: Granadier Lv 4
+  m_EditorClassIdentifier: 
+  visDist: 5
+  nearDist: 1
+  visAngle: 35
+  rangeDist: 4
+  meleeDist: 1
+  speed: 3
+  chaseSpeed: 5
+  rotationSpeed: 2
+  healthPoint: 10.8
+  attackDamage: 6

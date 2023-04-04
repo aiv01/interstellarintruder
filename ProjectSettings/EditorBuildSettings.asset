@@ -6,27 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu Change Scene.unity
-    guid: 5920587efae01ac43a30b250e129d724
-  - enabled: 1
-    path: Assets/Scenes/AiTest.unity
-    guid: 47a118ae7567e074191de271804fdc08
-  - enabled: 1
-    path: Assets/Scenes/InteractableTest.unity
-    guid: 54a732677845706478444fb55bad715e
-  - enabled: 1
-    path: Assets/Scenes/MapTest.unity
-    guid: 9bd344e966b41554ba6f8ffe1bec336e
-  - enabled: 1
-    path: Assets/Scenes/Player Scene.unity
-    guid: e24e9263dc46fe248b3f04b1d38cf45e
-  - enabled: 1
-    path: Assets/Scenes/GameScene/GameOverScene.unity
-    guid: 1e1121a3965708f49b773eb68e9b205c
+    path: Assets/Scenes/GameScene/MenuScene.unity
+    guid: 209a3ef75f14f3d40b925993303fb98b
   - enabled: 1
     path: Assets/Scenes/GameScene/MapScene.unity
     guid: 9b99401fd008a1f40acf22628f5c17ed
-  - enabled: 1
-    path: Assets/Scenes/GameScene/MenuScene.unity
-    guid: 209a3ef75f14f3d40b925993303fb98b
   m_configObjects: {}

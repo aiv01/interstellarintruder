@@ -30,4 +30,9 @@ public class IsaacTileInfo : MonoBehaviour
                 spawner.Despawn();
             }
     }
+
+    public void OnInteract(bool interacted)
+    {
+        interactable = interacted;
+    }
 }

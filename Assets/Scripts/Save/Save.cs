@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Save : MonoBehaviour
 {
+    public GameManager Gm;
     public IsaacGeneratorSO gen;
     public PlayerStats stats;
     public RoomManager roomManager;
@@ -14,6 +15,14 @@ public class Save : MonoBehaviour
     public bool save;
     public bool load;
 
+    private void Awake()
+    {
+        Gm = GameObject.Find("GameMgr").GetComponent<GameManager>();
+    }
+    private void Start()
+    {
+        if (Gm.onLoad) LoadAll();
+    }
     private void Update()
     {
         if (save)
@@ -63,8 +72,14 @@ public class Save : MonoBehaviour
     public void LoadGen()
     {
         TileMapData data = FileHandler.ReadFromJSON<TileMapData>(file);
-        GameObject.Find("GameMgr").GetComponent<GameManager>().level = data.level;
+        Gm.level = data.level;
         gen.LoadMap(gen.tr, data);
+    }
+    public void LoadAll()
+    {
+        LoadGen();
+        LoadPlayer();
+        Gm.onLoad = false;
     }
 
 }
