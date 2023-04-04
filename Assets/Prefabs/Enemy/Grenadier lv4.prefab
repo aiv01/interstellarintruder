@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: -3140861283384178985}
   - component: {fileID: 1210349196540147983}
   - component: {fileID: 6081755127532059551}
-  - component: {fileID: 4328079099631886553}
+  - component: {fileID: 8937635595482792903}
   m_Layer: 7
   m_Name: Grenadier lv4
   m_TagString: Enemy
@@ -585,13 +585,13 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3055063078037888638}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.4274218
   m_Height: 3.3798366
   m_Direction: 1
   m_Center: {x: 0.0603199, y: 1.8835995, z: -0.05278051}
---- !u!114 &4328079099631886553
+--- !u!114 &8937635595482792903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3055063078037888638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a0ad2b8581318147b98947e840f17c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 33215d122290bfc448049c7eab85f23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3055063078037888924
@@ -1073,6 +1073,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3055063078037848628}
+  - component: {fileID: 1660876649278420139}
+  - component: {fileID: 8814582321820686740}
   m_Layer: 7
   m_Name: Grenadier_LeftHand
   m_TagString: Untagged
@@ -1097,6 +1099,31 @@ Transform:
   m_Father: {fileID: 3055063078037848578}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1660876649278420139
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055063078037888980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.124041, y: 0.56585616, z: 0.6447922}
+  m_Center: {x: 0.062020384, y: -0.031010168, z: -0.0028194496}
+--- !u!114 &8814582321820686740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055063078037888980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0ad2b8581318147b98947e840f17c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3055063078037888982
 GameObject:
   m_ObjectHideFlags: 0

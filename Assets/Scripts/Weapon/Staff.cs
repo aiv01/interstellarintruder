@@ -12,12 +12,21 @@ namespace Weapon
         }
         #endregion
 
+        PlayerStats _playerStats;
+
+        private void Awake()
+        {
+            _playerStats = GetComponentInParent<PlayerStats>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Hit Collider Staff");
             if (other.gameObject.tag == "Enemy")
             {
+                Debug.Log("Hit Melee");
                 var enemy = other.gameObject.GetComponent<EnemyAI>();
-                enemy.currentHp -= ((damage * enemy.stats.attackDamage / 100) + damage);
+                enemy.currentHp -= ((damage * _playerStats.Damage / 100) + damage);
             }
         }
     }

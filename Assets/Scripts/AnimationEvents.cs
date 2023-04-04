@@ -16,12 +16,22 @@ public class AnimationEvents : MonoBehaviour
 
     public void GameOver()
     {
-        //SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("GameOverScene");
     }
     #endregion
 
     #region Enemy Animation Event
     public void ActivateShield()
+    {
+
+    }
+
+    public void DamageMelee()
+    {
+        
+    }
+
+    public void MeleeAttack()
     {
 
     }

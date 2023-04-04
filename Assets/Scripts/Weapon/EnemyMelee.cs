@@ -2,10 +2,21 @@ using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour
 {
-    private EnemyAI _enemyAI;
-    private void DamageMelee(PlayerStats _playerStats)
+    EnemyAI _enemyAI;
+    PlayerStats _playerStats;
+
+    private void Awake()
     {
-        var stats = _playerStats.gameObject.GetComponent<PlayerStats>();
-        stats.Health -= _enemyAI.currentAttackDamage;
+        _enemyAI = GetComponentInParent<EnemyAI>();
+        _playerStats = GameObject.Find("Ellen").GetComponent<PlayerStats>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            var stats = _playerStats.gameObject.GetComponent<PlayerStats>();
+            stats.Health -= _enemyAI.currentAttackDamage;
+        }
     }
 }

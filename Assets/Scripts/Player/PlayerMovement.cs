@@ -22,7 +22,10 @@ public class PlayerMovement : MonoBehaviour
         get
         {
             if (_stats.Health <= 0)
+            {
+                _animator.SetTrigger("Death");
                 return true;
+            }
             return false;
         }
     }
@@ -71,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Death()
     {
-        _animator.SetTrigger("Death");
         _controller.enabled = false;
         _stats.Health = 0;
     }
