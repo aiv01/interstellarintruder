@@ -30,6 +30,7 @@ public class RoomManager : MonoBehaviour
         currentTile = isaacTileInfos[tilePos.x, tilePos.y];
         currentTile.gameObject.SetActive(true);
         myWarp.Invoke(currentTile.transform.position);
+        currentTile.visited = true;
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }
@@ -40,6 +41,7 @@ public class RoomManager : MonoBehaviour
         currentTile = isaacTileInfos[pos.x,pos.y];
         currentTile.gameObject.SetActive(true);
         myWarp.Invoke(currentTile.transform.position);
+        currentTile.visited= true;
         currentTile.SpawnAll();
         ActivateDoors(currentTile.visited);
     }

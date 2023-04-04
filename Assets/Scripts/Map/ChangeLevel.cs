@@ -22,6 +22,10 @@ public class ChangeLevel : MonoBehaviour
     {
         if (input.Input.Interaction.ReadValue<float>() > 0)
         {
+            if(gameManager.level >= 4)
+            {
+                //SceneManager.LoadScene("Gameover");
+            }
             gameManager.level++;
             SceneManager.LoadScene("MapScene");
         }
