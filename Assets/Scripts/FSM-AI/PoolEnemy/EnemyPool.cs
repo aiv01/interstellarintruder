@@ -5,11 +5,15 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     [SerializeField]
-    private EnemyAI enemyPrefab;
-
+    private List<EnemyAI> enemyPrefabs;
+    private int level;
     private int poolSize = 10;
     private List<EnemyAI> pool = new List<EnemyAI>();
 
+    private void Awake()
+    {
+        level = GameObject.Find("GameMgr").GetComponent<GameManager>().level;
+    }
     private void Start()
     {
         FillPool();
@@ -23,7 +27,7 @@ public class EnemyPool : MonoBehaviour
 
     private EnemyAI CreateInstance()
     {
-        EnemyAI instance = Instantiate(enemyPrefab,transform);
+        EnemyAI instance = Instantiate(enemyPrefabs[level-1],transform);
         pool.Add(instance);
         return instance;
     }
