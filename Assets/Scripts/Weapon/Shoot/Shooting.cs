@@ -40,16 +40,6 @@ namespace Weapon.Shoot
             CanShoot();
         }
 
-        /*
-        public bool CanShoot()
-        {
-            if (Time.time < lastFire + shootCoolDown)
-                return false;
-            lastFire = Time.time;
-            return true;
-        }
-        */
-
         private void CanShoot()
         {
             if (_shooted)
@@ -70,9 +60,13 @@ namespace Weapon.Shoot
             _shooted = true;
             Bullet instance = BulletPool.GetBullet();
             instance.transform.position = transform.TransformPoint(mouthOfFire);
-            instance.transform.forward = transform.right;
             if (_playerMgr.Is3rdPerson)
+            {
+                instance.transform.forward = transform.right;
                 Aim(instance);
+            }
+            else
+                instance.transform.forward = _playerStats.transform.forward;
             return true;
         }
 

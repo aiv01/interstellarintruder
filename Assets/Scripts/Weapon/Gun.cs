@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Weapon.Shoot;
@@ -61,6 +60,7 @@ namespace Weapon
         public void GunShootPosition()
         {
             transform.SetParent(_handPlayer);
+
             transform.localPosition = new Vector3(0.15f, 0.033f, -0.042f);
         }
 

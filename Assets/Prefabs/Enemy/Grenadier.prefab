@@ -293,6 +293,7 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   currentHp: 0
+  currentAttackDamage: 0
   Hitted: 0
   myTile: {fileID: 0}
 --- !u!82 &1167883467713202539
@@ -574,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c477428d2e9b2d64d95b4a2816fe838b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouthOfFire: {x: 0, y: 3.5, z: 0}
+  mouthOfFire: {x: 0, y: 4, z: 0}
 --- !u!136 &6081755127532059551
 CapsuleCollider:
   m_ObjectHideFlags: 0

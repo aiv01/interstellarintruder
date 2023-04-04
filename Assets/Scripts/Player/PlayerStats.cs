@@ -1,8 +1,42 @@
-using Stats.Health;
 using UnityEngine;
 
-public class PlayerStats : StatsModule
+public class PlayerStats : MonoBehaviour
 {
+    #region Health Variable - Property
+    //Health Point
+    protected float maxHP = 100f;
+    protected float totalHP = 20f;
+    protected float health;
+    public float Health
+    {
+        get => health;
+        set
+        {
+            if (value + totalHP > maxHP) return;
+            if (value + health > maxHP)
+                health = maxHP;
+            else
+                health = value;
+            totalHP = value;
+        }
+    }
+    #endregion
+
+    #region Damage Variable - Property
+    //Attack Damage
+    protected float maxDamage = 20f;
+    protected float damage = 2f;
+    public float Damage
+    {
+        get => damage;
+        set
+        {
+            if (value + damage > maxDamage) return;
+            damage = value;
+        }
+    }
+    #endregion
+
     #region Speed Attack Variable - Property
     //Attack Speed
     private readonly float maxAttackSpeed = 2.0f;
@@ -32,4 +66,9 @@ public class PlayerStats : StatsModule
         }
     }
     #endregion
+
+    private void Start()
+    {
+        health = totalHP;
+    }
 }
