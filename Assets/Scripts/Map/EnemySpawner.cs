@@ -4,8 +4,6 @@ using UnityEngine;
 public class EnemySpawner : Spawner
 {
     [SerializeField]
-    private EnemyAI enemyToSpawn;
-    [SerializeField]
     private List<Transform> myWaypoints;
     private EnemyPool _enemyPool;
     private EnemyAI myEnemy;
@@ -18,7 +16,6 @@ public class EnemySpawner : Spawner
     public override void Init()
     {
         _enemyPool = FindObjectOfType<EnemyPool>();
-        TileInfo.enemyCounter++;
         base.Init();
     }
     public override void Despawn()
@@ -39,7 +36,7 @@ public class EnemySpawner : Spawner
         myEnemy.waypoints = myWaypoints;
         myEnemy.myTile = TileInfo;
         myEnemy.gameObject.SetActive(true);
-        TileInfo.enemyCounter += 1;
+        TileInfo.enemyCounter++;
     }
     
 }
