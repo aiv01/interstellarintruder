@@ -12,8 +12,6 @@ namespace Weapon.Shoot
 
         #region Private variable
         private BulletPool bulletPool = null;
-        private float shootCoolDown = 2.5f;
-        private float lastFire = -10.0f;
         #endregion
 
         public BulletPool BulletPool

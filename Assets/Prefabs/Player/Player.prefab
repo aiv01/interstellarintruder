@@ -229,6 +229,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: ffae9263bd1a66245bd2bad16f271364, type: 3}
   m_PrefabInstance: {fileID: 2782674056808853119}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &4946119759332526358
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2782674056808818911}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &2782674057144328129
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -385,7 +401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handPlayer: {fileID: 2782674057600611522}
   _gunHoldPosition: {fileID: 2782674057461082521}
-  _gunReload: {fileID: 0}
 --- !u!114 &5629440746937259387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971fb0c159cfc3d46b691975282b17f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 0}
   mouthOfFire: {x: 0, y: 0, z: 0}
 --- !u!4 &2782674056909259954 stripped
 Transform:
@@ -1017,7 +1031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335cc42d3d64af64fb2c2915022a2e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageSkill: {fileID: 0}
 --- !u!114 &2782674057953604991
 MonoBehaviour:
   m_ObjectHideFlags: 0

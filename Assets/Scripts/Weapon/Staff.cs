@@ -21,10 +21,8 @@ namespace Weapon
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Hit Collider Staff");
             if (other.gameObject.tag == "Enemy")
             {
-                Debug.Log("Hit Melee");
                 var enemy = other.gameObject.GetComponent<EnemyAI>();
                 enemy.currentHp -= ((damage * _playerStats.Damage / 100) + damage);
             }
