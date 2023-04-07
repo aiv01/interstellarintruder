@@ -1,4 +1,3 @@
-using Attack;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerMgr _playerMgr;
 
     private Vector3 inputVector;
-    private float walkSpeed = 1.0f;
+    private float walkSpeed = 2.0f;
     private float runSpeed = 6.0f;
     #endregion
 
@@ -48,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
 
         _animator.SetBool("isRanged", !_playerMgr.IsMelee);
     }
+
+    #region Public Methods
     public void WarpPlayer(Vector3 pos)
     {
         _controller.enabled = false;
@@ -58,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
     public void HurtDirection(Transform bullet)
     {
         Vector3 pos = transform.InverseTransformPoint(bullet.position).normalized;
-        pos.y = 0;
 
         if (pos.x < 0)
             _animator.SetFloat("HurtFromX", -1);
@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         _controller.enabled = false;
         _stats.Health = 0;
     }
+    #endregion
 
     #region Enable Disable
     private void OnEnable()
@@ -102,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
         _controller.Move(
                 (
-                    _animator.GetFloat("ForwardSpeed") * _controller.transform.forward +
-                    _animator.GetFloat("HorizontalSpeed") * _controller.transform.right
+                    (_animator.GetFloat("ForwardSpeed") + _stats.SpeedMovement) * _controller.transform.forward +
+                    (_animator.GetFloat("HorizontalSpeed") + _stats.SpeedMovement) * _controller.transform.right
                 ) *
                 Time.deltaTime
             );
