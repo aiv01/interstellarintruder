@@ -69,6 +69,15 @@ public class Save : MonoBehaviour
         stats.SpeedMovement = info.speedMovement;
         roomManager.Load(info.currentRoom);
     }
+    public void LoadStats()
+    {
+        if (Gm.level <= 1) return;
+        PlayerInfo info = FileHandler.ReadFromJSON<PlayerInfo>(playerSav);
+        stats.Health = info.hp;
+        stats.Damage = info.attackDamage;
+        stats.SpeedAttack = info.attackSpeed;
+        stats.SpeedMovement = info.speedMovement;
+    }
     public void LoadGen()
     {
         TileMapData data = FileHandler.ReadFromJSON<TileMapData>(file);
