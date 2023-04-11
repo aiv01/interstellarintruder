@@ -1147,6 +1147,10 @@ PrefabInstance:
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 411367720}
+    - target: {fileID: 2782674057953604934, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
+      propertyPath: saveclass
+      value: 
+      objectReference: {fileID: 146832475}
     - target: {fileID: 5629440746937259387, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
       propertyPath: animator
       value: 

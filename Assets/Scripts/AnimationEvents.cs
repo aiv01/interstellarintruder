@@ -19,6 +19,7 @@ public class AnimationEvents : MonoBehaviour
     public void GameOver()
     {
         saveclass.DeleteSaves();
+        Cursor.visible = true;
         SceneManager.LoadScene("GameOverScene");
     }
     #endregion
@@ -57,6 +58,11 @@ public class AnimationEvents : MonoBehaviour
     public void Shoot()
     {
 
+    }
+
+    public void Death()
+    {
+        gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
     }
     #endregion
 }

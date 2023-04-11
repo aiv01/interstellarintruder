@@ -4,14 +4,6 @@ namespace Weapon
 {
     public class Staff : MonoBehaviour
     {
-        #region Property
-        private float damage = 2.0f;
-        public float Damage
-        {
-            get => damage;
-        }
-        #endregion
-
         PlayerStats _playerStats;
 
         private void Awake()
@@ -24,7 +16,7 @@ namespace Weapon
             if (other.gameObject.tag == "Enemy")
             {
                 var enemy = other.gameObject.GetComponent<EnemyAI>();
-                enemy.currentHp -= (_playerStats.Damage + damage);
+                enemy.currentHp -= _playerStats.Damage;
             }
         }
     }

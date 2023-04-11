@@ -3,20 +3,24 @@ using UnityEngine;
 public class EnemyMelee : MonoBehaviour
 {
     EnemyAI _enemyAI;
-    PlayerStats _playerStats;
+    PlayerMovement _playerTarget;
 
     private void Awake()
     {
         _enemyAI = GetComponentInParent<EnemyAI>();
-        _playerStats = GameObject.Find("Ellen").GetComponent<PlayerStats>();
+        _playerTarget = GameObject.Find("Ellen").GetComponent<PlayerMovement>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
-            var stats = _playerStats.gameObject.GetComponent<PlayerStats>();
+            var stats = other.gameObject.GetComponent<PlayerStats>();
             stats.Health -= _enemyAI.currentAttackDamage;
+            if (_playerTarget.IsDeath)
+                _playerTarget.Death();
+            else
+                _playerTarget.HurtDirection(transform);
         }
     }
 }
