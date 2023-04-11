@@ -23,7 +23,7 @@ public class PowerUpSpawner : Spawner
 
     public override void Spawn()
     {
-        myPower = pool.GetPowerUp();
+        myPower = pool.GetRandomPowerUp();
         myPower.transform.position = transform.position;
     }
 }
