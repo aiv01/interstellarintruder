@@ -8,7 +8,7 @@ namespace Weapon.Projectile
         public event BulletDelegate OnDeath = null;
 
         #region Protected variables
-        protected float bulletSpeed = 5.0f;
+        protected float bulletSpeed = 10.0f;
         protected float lifetime = 3.0f;
         protected float timer = 0.0f;
         protected float bulletDamage = 2.0f;

@@ -50,6 +50,8 @@ public class MenuManager : MonoBehaviour
     {
         gameManager.level = 1;
         SceneManager.LoadScene("MapScene");
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void QuitGame()
@@ -78,16 +80,11 @@ public class MenuManager : MonoBehaviour
     public void Exit()
     {
         SceneManager.LoadScene("MenuScene");
+        Cursor.visible = true;
     }
     #endregion
 
     #region GameOver Scene
-
-    public void NewGame()
-    {
-
-    }
-
     public void QuitGameOver()
     {
         SceneManager.LoadScene("MenuScene");

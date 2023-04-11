@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4b23e59efcbf3488a6cb24635aaa54, type: 3}
   m_Name: Granadier Lv 4
   m_EditorClassIdentifier: 
-  visDist: 5
+  visDist: 7
   nearDist: 1
-  visAngle: 35
-  rangeDist: 4
+  visAngle: 45
+  rangeDist: 5
   meleeDist: 1
   speed: 3
   chaseSpeed: 5
