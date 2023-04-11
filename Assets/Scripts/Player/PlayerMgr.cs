@@ -23,6 +23,7 @@ public class PlayerMgr : MonoBehaviour
 
     #region Player Component
     private PlayerAttack _playerAttack;
+    private PlayerRotation _playerRotation;
     #endregion
 
     #region Property
@@ -42,6 +43,7 @@ public class PlayerMgr : MonoBehaviour
     private void Start()
     {
         _playerAttack = GetComponentInChildren<PlayerAttack>();
+        _playerRotation = GetComponentInChildren<PlayerRotation>();
         _gunComponent = GetComponentInChildren<Gun>();
         _gunComponent.GunHoldPosition();
         _staffComponent = GetComponentInChildren<Staff>();
@@ -85,6 +87,7 @@ public class PlayerMgr : MonoBehaviour
         {
             _is3rdPerson = !_is3rdPerson;
             _camera.Priority *= -1;
+            Cursor.visible = !_is3rdPerson;
         }
         #endregion
     }
@@ -106,6 +109,6 @@ public class PlayerMgr : MonoBehaviour
     private void HandlePauseButtonPressed(InputAction.CallbackContext obj)
     {
         onPauseRequested.Invoke();
-        gameObject.SetActive(false);
+        _playerRotation.enabled = false;
     }
 }

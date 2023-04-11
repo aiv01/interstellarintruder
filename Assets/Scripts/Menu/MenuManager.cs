@@ -80,6 +80,7 @@ public class MenuManager : MonoBehaviour
     public void QuitGameOver()
     {
         SceneManager.LoadScene("MenuScene");
+        Cursor.visible = true;
     }
     #endregion
 

@@ -37,7 +37,12 @@ public class PlayerRotation : MonoBehaviour
                     RotationKeyBoard_TopDown();
             }
             else
-                RotationGamepad();
+            {
+                if (_playerMgr.Is3rdPerson)
+                    RotationGamepad_3rdPerson();
+                else
+                    RotationGamepad_TopDown();
+            }
         }
     }
 
@@ -59,10 +64,15 @@ public class PlayerRotation : MonoBehaviour
     #endregion
 
     #region Gamepad
-    private void RotationGamepad()
+    private void RotationGamepad_3rdPerson()
     {
-        var rotation = _playerInput.Input.RotationGamePad.ReadValue<Vector2>();
+        Vector2 rotation = _playerInput.Input.RotationGamePad.ReadValue<Vector2>();
         transform.Rotate(new Vector3(0, rotation.x));
+    }
+    private void RotationGamepad_TopDown()
+    {
+        Vector2 rotation = _playerInput.Input.RotationGamePad.ReadValue<Vector2>();
+        transform.forward = new Vector3(rotation.x, 0, rotation.y);
     }
     #endregion
 }
