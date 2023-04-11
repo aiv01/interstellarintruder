@@ -81,7 +81,12 @@ public class Save : MonoBehaviour
         LoadPlayer();
         Gm.onLoad = false;
     }
-
+    public void DeleteSaves()
+    {
+        var path = Application.dataPath;
+        File.Delete(path + "/map.sav");
+        File.Delete(path + "/player.sav");
+    }
 }
 
 [Serializable]
