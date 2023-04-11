@@ -3245,6 +3245,7 @@ GameObject:
   - component: {fileID: 1976356079}
   - component: {fileID: 1976356078}
   - component: {fileID: 1976356077}
+  - component: {fileID: 1976356080}
   m_Layer: 5
   m_Name: Load Game
   m_TagString: Untagged
@@ -3312,7 +3313,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1976356078}
   m_OnClick:
     m_PersistentCalls:
@@ -3367,6 +3368,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976356075}
   m_CullTransparentMesh: 1
+--- !u!114 &1976356080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976356075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bc35fbe60a5ba4d91db9f6d715f56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 1976356077}
 --- !u!1 &2032628662
 GameObject:
   m_ObjectHideFlags: 0
