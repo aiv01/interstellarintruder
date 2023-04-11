@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
     //Attack Damage
     protected float maxDamage = 20f;
     protected float damage = 2f;
+    [SerializeField] Save saves;
     public float Damage
     {
         get => damage;
@@ -69,6 +70,11 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        if(health<= 0)
         health = totalHP;
+    }
+    private void OnEnable()
+    {
+        saves.LoadStats();
     }
 }
