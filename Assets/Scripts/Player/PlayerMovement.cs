@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerMgr _playerMgr;
 
     private Vector3 inputVector;
+    private bool isRun = false;
     private float walkSpeed = 2.0f;
     private float runSpeed = 6.0f;
     #endregion
@@ -42,7 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(!IsDeath)
+        if (_playerInput.Input.Run.triggered)
+            isRun = !isRun;
+        if (!IsDeath)
             Move();
 
         _animator.SetBool("isRanged", !_playerMgr.IsMelee);
@@ -96,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputVector = _playerInput.Input.Move.ReadValue<Vector2>();
 
-        if (_playerInput.Input.Run.IsPressed())
+        if (isRun)
             RunMove();
         else
             WalkMove();
