@@ -63,6 +63,7 @@ public class RoomManager : MonoBehaviour
                 break;
         }
         nextTile = isaacTileInfos[tilePos.x, tilePos.y];
+        Debug.Log(tilePos);
         nextTile.gameObject.SetActive(true);
         nextTile.SpawnAll();
         foreach (Door door in nextTile.Doors)
@@ -88,7 +89,7 @@ public class RoomManager : MonoBehaviour
             }
         }
         currentTile.DespawnAll();
-        currentTile.gameObject.SetActive(false);
+        //currentTile.gameObject.SetActive(false);
         currentTile = nextTile;
         
         ActivateDoors(currentTile.visited);

@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private GameObject firstSelectedControl;
     [SerializeField]
+    private GameObject optionObject;
+    [SerializeField]
     private UnityEngine.Events.UnityEvent onPauseLeft;
     #endregion
 
@@ -64,12 +66,13 @@ public class MenuManager : MonoBehaviour
 
     public void Option()
     {
-
+        gameObject.SetActive(false);
+        optionObject.SetActive(true);
     }
 
     public void LoadGame()
     {
-
+        gameManager.LoadLevel();
     }
 
     public void Exit()

@@ -77,7 +77,7 @@ namespace PowerUp
             PowerUpBase val = null;
 
             val = powerUps[Random.Range(0, powerUps.Count)];
-
+            val.gameObject.SetActive(true);
             return val;
         }
         #endregion

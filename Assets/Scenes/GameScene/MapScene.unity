@@ -239,6 +239,22 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4453994651066062147, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
+      propertyPath: m_DeadZoneWidth
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453994651066062147, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
+      propertyPath: m_DeadZoneHeight
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453994651262836631, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453994651262836631, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000009536742
+      objectReference: {fileID: 0}
     - target: {fileID: 8742951634857714008, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
       propertyPath: m_RootOrder
       value: 4

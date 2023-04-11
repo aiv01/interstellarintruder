@@ -5,6 +5,7 @@ public class ChangeLevel : MonoBehaviour
 {
     public PlayerInput input;
     GameManager gameManager;
+    bool triggered = false;
     public void Awake()
     {
         input = new PlayerInput();
@@ -20,13 +21,14 @@ public class ChangeLevel : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (input.Input.Interaction.ReadValue<float>() > 0)
+        if (input.Input.Interaction.WasPerformedThisFrame() && !triggered)
         {
             if(gameManager.level >= 4)
             {
                 //SceneManager.LoadScene("Gameover");
             }
             gameManager.level++;
+            triggered = true;
             SceneManager.LoadScene("MapScene");
         }
     }

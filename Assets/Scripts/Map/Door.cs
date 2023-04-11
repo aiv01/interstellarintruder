@@ -14,6 +14,7 @@ public class Door : MonoBehaviour
     private MyDoorEvent doorEvent;
     public RoomManager roomManager;
     private Animator animator;
+    private bool inTrigger = false;
     private Animator Animator
     {
         get
@@ -33,6 +34,7 @@ public class Door : MonoBehaviour
         animator = GetComponent<Animator>();
         doorEvent = new MyDoorEvent();
         doorEvent.AddListener(roomManager.DoorWarp);
+        
     }
    
     
@@ -62,14 +64,27 @@ public class Door : MonoBehaviour
         doorEvent.RemoveAllListeners();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(input.Input.Interaction.ReadValue<float>() > 0 && other.CompareTag("Player") && doorOpen)
-        doorEvent.Invoke(doorDirection);
-        
+        if (other.CompareTag("Player"))
+        {
+            inTrigger = true;  
+        }
     }
 
-   
+    private void OnTriggerExit(Collider other)
+    {
+        inTrigger = false;
+    }
+
+    private void Update()
+    {
+        if(input.Input.Interaction.WasPerformedThisFrame() && inTrigger && doorOpen)
+        {
+            inTrigger = false;
+            doorEvent.Invoke(doorDirection);
+        }
+    }
 
     public void OpenCloseDoor(bool status)
     {

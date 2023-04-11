@@ -101,7 +101,7 @@ public class IsaacGeneratorSO : MonoBehaviour{
                     if (tiles[col, row] != null)
                     {
                         var go = Instantiate(tiles[col, row].info, container);
-                        go.gameObject.SetActive(false);
+                        //go.gameObject.SetActive(false);
                         go.name = "Tile " + col + ", " + row;
                         go.transform.localPosition = new Vector3(col * offset.x, 0, row * offset.y);
                         tileInfo[col,row] = go;
