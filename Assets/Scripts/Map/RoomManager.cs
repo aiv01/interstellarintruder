@@ -63,7 +63,6 @@ public class RoomManager : MonoBehaviour
                 break;
         }
         nextTile = isaacTileInfos[tilePos.x, tilePos.y];
-        Debug.Log(tilePos);
         nextTile.gameObject.SetActive(true);
         nextTile.SpawnAll();
         foreach (Door door in nextTile.Doors)

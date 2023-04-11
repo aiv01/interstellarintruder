@@ -63,7 +63,10 @@ public class MenuManager : MonoBehaviour
     #region Game Menu Scene
     public void Resume()
     {
-
+        onPauseLeft.Invoke();
+        gameObject.SetActive(false);
+        GameObject.FindAnyObjectByType<PlayerRotation>().enabled = true;
+        Cursor.visible = false;
     }
 
     public void Option()
@@ -99,6 +102,8 @@ public class MenuManager : MonoBehaviour
     {
         onPauseLeft.Invoke();
         gameObject.SetActive(false);
+        GameObject.FindAnyObjectByType<PlayerRotation>().enabled = true;
+        Cursor.visible = false;
     }
     private void HandleNavigationPerformed(InputAction.CallbackContext context)
     {

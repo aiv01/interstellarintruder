@@ -27,21 +27,22 @@ public class PlayerRotation : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(_playerInput.Input.DeltaMouse.activeControl.device.enabled);
         if (!_playerMovement.IsDeath)
         {
-            if (!(_playerInput.Input.RotationGamePad.ReadValue<Vector2>() != Vector2.zero))
-            {
-                if (_playerMgr.Is3rdPerson)
-                    RotationKeyBoard_3rdPerson();
-                else
-                    RotationKeyBoard_TopDown();
-            }
-            else
+            if (_playerInput.Input.RotationGamePad.activeControl != null)
             {
                 if (_playerMgr.Is3rdPerson)
                     RotationGamepad_3rdPerson();
                 else
                     RotationGamepad_TopDown();
+            }
+            else if (_playerInput.Input.DeltaMouse.activeControl != null)
+            {
+                if (_playerMgr.Is3rdPerson)
+                    RotationKeyBoard_3rdPerson();
+                else
+                    RotationKeyBoard_TopDown();
             }
         }
     }
