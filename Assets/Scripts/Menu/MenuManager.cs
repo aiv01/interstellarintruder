@@ -69,11 +69,6 @@ public class MenuManager : MonoBehaviour
 
     }
 
-    public void LoadGame()
-    {
-
-    }
-
     public void Exit()
     {
         SceneManager.LoadScene("MenuScene");

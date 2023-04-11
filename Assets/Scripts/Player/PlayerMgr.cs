@@ -1,7 +1,6 @@
 using Attack;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Weapon;
 
@@ -16,11 +15,14 @@ public class PlayerMgr : MonoBehaviour
 
     #region Private Variable
     public PlayerInput _playerInput;
-    private PlayerAttack _characterAttack;
     private Gun _gunComponent;
     private Staff _staffComponent;
 
     private bool canShoot = true;
+    #endregion
+
+    #region Player Component
+    private PlayerAttack _playerAttack;
     #endregion
 
     #region Property
@@ -39,7 +41,7 @@ public class PlayerMgr : MonoBehaviour
 
     private void Start()
     {
-        _characterAttack = GetComponentInChildren<PlayerAttack>();
+        _playerAttack = GetComponentInChildren<PlayerAttack>();
         _gunComponent = GetComponentInChildren<Gun>();
         _gunComponent.GunHoldPosition();
         _staffComponent = GetComponentInChildren<Staff>();
@@ -68,12 +70,12 @@ public class PlayerMgr : MonoBehaviour
         if (_playerInput.Input.Attack.triggered)
         {
             if (isMeleeAttack)
-                _characterAttack.MeleeAnimation();
+                _playerAttack.MeleeAnimation();
             else
             {
                 canShoot = _gunComponent.CountAmmo();
                 if (canShoot)
-                    _characterAttack.RangedAnimation();
+                    _playerAttack.RangedAnimation();
             }
         }
         #endregion
