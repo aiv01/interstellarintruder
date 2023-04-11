@@ -50,6 +50,7 @@ public class PlayerRotation : MonoBehaviour
     #region KeyBoard
     private void RotationKeyBoard_TopDown()
     {
+        Cursor.visible = true;
         var mousePos = _playerInput.Input.MousePosition.ReadValue<Vector2>();
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         var offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
@@ -59,6 +60,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void RotationKeyBoard_3rdPerson()
     {
+        Cursor.visible = false;
         var rotation = _playerInput.Input.DeltaMouse.ReadValue<Vector2>();
         transform.Rotate(new Vector3(0, rotation.x));
     }

@@ -56,7 +56,6 @@ public class PlayerMgr : MonoBehaviour
 
     void Update()
     {
-        Cursor.visible = !_is3rdPerson;
         #region Change Weapon
         if (_playerInput.Input.ChangeWeapon.triggered)
         {
@@ -110,5 +109,6 @@ public class PlayerMgr : MonoBehaviour
     {
         onPauseRequested.Invoke();
         _playerRotation.enabled = false;
+        Cursor.visible = true;
     }
 }
