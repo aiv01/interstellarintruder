@@ -23,11 +23,12 @@ public class ChangeLevel : MonoBehaviour
     {
         if (input.Input.Interaction.WasPerformedThisFrame() && !triggered)
         {
-            if(gameManager.level >= 4)
-            {
-                //SceneManager.LoadScene("Gameover");
-            }
             gameManager.level++;
+            if (gameManager.level > 4)
+            {
+                SceneManager.LoadScene("EndGame");
+                return;
+            }
             triggered = true;
             SceneManager.LoadScene("MapScene");
         }

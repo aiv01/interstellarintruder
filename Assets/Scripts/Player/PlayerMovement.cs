@@ -107,7 +107,8 @@ public class PlayerMovement : MonoBehaviour
         _controller.Move(
                 (
                     (_animator.GetFloat("ForwardSpeed") + _stats.SpeedMovement * _animator.GetFloat("ForwardSpeed")) * _controller.transform.forward +
-                    (_animator.GetFloat("HorizontalSpeed") + _stats.SpeedMovement * _animator.GetFloat("HorizontalSpeed")) * _controller.transform.right
+                    (_animator.GetFloat("HorizontalSpeed") + _stats.SpeedMovement * _animator.GetFloat("HorizontalSpeed")) * _controller.transform.right + 
+                    transform.up * -9.1f
                 ) *
                 Time.deltaTime
             );

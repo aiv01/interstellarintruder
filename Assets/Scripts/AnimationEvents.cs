@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class AnimationEvents : MonoBehaviour
 {
-    [SerializeField]
     private Save saveclass;
     #region Player Animation Event
     public void MeleeAttackStart()
@@ -18,6 +17,7 @@ public class AnimationEvents : MonoBehaviour
 
     public void GameOver()
     {
+        if(saveclass == null) FindAnyObjectByType<Save>();
         saveclass.DeleteSaves();
         Cursor.visible = true;
         SceneManager.LoadScene("GameOverScene");

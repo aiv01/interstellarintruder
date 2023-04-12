@@ -71,6 +71,7 @@ public class Save : MonoBehaviour
     }
     public void LoadStats()
     {
+        Gm = GameObject.Find("GameMgr").GetComponent<GameManager>();
         if (Gm.level <= 1) return;
         PlayerInfo info = FileHandler.ReadFromJSON<PlayerInfo>(playerSav);
         stats.Health = info.hp;

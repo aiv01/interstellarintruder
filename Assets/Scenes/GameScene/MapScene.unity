@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4453994650512625267, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4453994651066062147, guid: 72ef667bd5e1419479b90b05b63cdfb0, type: 3}
       propertyPath: m_DeadZoneWidth
@@ -1097,7 +1097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2782674055934857451, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2782674055934857451, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1149,6 +1149,10 @@ PrefabInstance:
       objectReference: {fileID: 411367720}
     - target: {fileID: 2782674057953604934, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
       propertyPath: saveclass
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782674057953604991, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}
+      propertyPath: saves
       value: 
       objectReference: {fileID: 146832475}
     - target: {fileID: 5629440746937259387, guid: 1c3fa2914a9b6a94f885f0d4299de6e1, type: 3}

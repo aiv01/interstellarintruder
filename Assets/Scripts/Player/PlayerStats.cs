@@ -68,11 +68,17 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
+    private void Awake()
+    {
+        if(saves == null) FindAnyObjectByType<Save>();
+    }
+
     private void Start()
     {
-        if(health<= 0)
-        health = totalHP;
+        if(health <= 0)
+            health = totalHP;
     }
+
     private void OnEnable()
     {
         saves.LoadStats();
